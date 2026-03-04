@@ -11,72 +11,66 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#111827;color:#F9FAFB;min-height:100vh;min-height:100dvh;direction:rtl;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;background:none}
+input{font-family:inherit}
 
-/* Loading */
 .loading-screen{position:fixed;inset:0;background:#111827;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
 .loading-screen .spinner{width:40px;height:40px;border:3px solid rgba(59,130,246,0.2);border-top-color:#3B82F6;border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Login */
 .login-screen{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
 .login-title{font-size:28px;font-weight:800;margin:12px 0 4px}
-.login-sub{color:#9CA3AF;font-size:14px;margin-bottom:32px}
-.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px}
-.login-btn{padding:14px;border-radius:14px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:10px;transition:all 0.15s}
+.login-sub{color:#9CA3AF;font-size:14px;margin-bottom:6px}
+.login-location{color:#6B7280;font-size:13px;margin-bottom:28px;font-weight:500}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:360px}
+.login-btn{padding:14px;border-radius:14px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:10px;transition:all 0.15s;position:relative}
 .login-btn:active{transform:scale(0.97)}
 .login-btn .emoji{font-size:28px}
 .login-btn .name{font-weight:600;font-size:15px}
+.login-btn.taken{opacity:0.35;pointer-events:none}
+.login-btn.taken::after{content:'✅';position:absolute;top:6px;left:6px;font-size:14px}
 
-/* Header */
 .header{background:linear-gradient(135deg,#1E3A5F,#0F172A);padding:14px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between}
 .header-center h1{font-size:18px;font-weight:800}
+.header-center .subtitle{color:#60A5FA;font-size:12px;font-weight:600}
 .header-center p{color:#9CA3AF;font-size:11px}
 .header-user{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:13px;font-weight:600}
 .header-logout{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.05);color:#9CA3AF;font-size:12px}
 
-/* Tabs */
 .tabs{display:flex;background:#0F172A;border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:50}
 .tab{flex:1;padding:10px 4px;border-bottom:3px solid transparent;color:#9CA3AF;font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.2s}
 .tab.active{border-bottom-color:#3B82F6;background:rgba(59,130,246,0.1);color:#3B82F6;font-weight:700}
 .tab .icon{font-size:18px}
 
-/* Content */
 .content{padding:16px;padding-bottom:40px;max-width:480px;margin:0 auto}
 .screen{display:none}
 .screen.active{display:block}
 .section-title{text-align:center;font-size:20px;margin-bottom:16px}
 .section-sub{text-align:center;color:#9CA3AF;font-size:13px;margin-bottom:16px}
 
-/* Cards */
 .card{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.05);margin-bottom:10px}
 .card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .card-icon{font-size:20px}
 .card-label{font-weight:600;font-size:14px}
 .card-desc{color:#6B7280;font-size:11px;margin-top:2px}
 
-/* Number input */
 .num-row{display:flex;align-items:center;gap:8px}
 .num-btn{width:48px;height:48px;border-radius:12px;border:1px solid rgba(255,255,255,0.15)!important;background:rgba(255,255,255,0.05);color:#F9FAFB;font-size:22px;display:flex;align-items:center;justify-content:center}
 .num-btn:active{background:rgba(255,255,255,0.15)}
 .num-val{flex:1;text-align:center;font-size:30px;font-weight:800}
 
-/* Time chips */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:8px 12px;border-radius:10px;font-size:13px;border:1px solid rgba(255,255,255,0.1)!important;background:rgba(255,255,255,0.03);color:#9CA3AF;font-weight:400;transition:all 0.15s}
+.chip{padding:8px 12px;border-radius:10px;font-size:12px;border:1px solid rgba(255,255,255,0.1)!important;background:rgba(255,255,255,0.03);color:#9CA3AF;font-weight:400;transition:all 0.15s}
 .chip:active{transform:scale(0.96)}
 .chip.sel{font-weight:600;border-width:2px!important}
 
-/* Progress */
 .prog-box{background:rgba(255,255,255,0.05);border-radius:12px;padding:12px;margin-bottom:14px}
 .prog-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px}
 .prog-track{background:rgba(255,255,255,0.1);border-radius:8px;height:6px;overflow:hidden}
 .prog-fill{background:linear-gradient(90deg,#3B82F6,#8B5CF6);height:100%;border-radius:8px;transition:width 0.3s}
 
-/* Submit */
 .big-btn{width:100%;padding:16px;border-radius:12px;font-size:16px;font-weight:700;margin-top:14px;transition:all 0.15s}
 .big-btn:active{transform:scale(0.98)}
 
-/* Podium */
 .podium{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-bottom:20px;padding:0 4px}
 .pod-item{text-align:center;flex:1}
 .pod-emoji{font-size:30px;margin-bottom:2px}
@@ -86,14 +80,12 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;ba
 .pod-score{font-weight:800;color:#fff;font-size:18px}
 .pod-pts{color:rgba(255,255,255,0.8);font-size:10px}
 
-/* Player rows */
 .p-row{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
 .p-rank{color:#6B7280;font-weight:700;font-size:16px;width:22px}
 .p-emoji{font-size:22px}
 .p-name{flex:1;font-weight:600;font-size:14px}
 .p-score{font-weight:700;font-size:17px}
 
-/* Status */
 .s-row{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
 .s-badge{padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap}
 .s-done{background:rgba(16,185,129,0.15);color:#10B981}
@@ -101,11 +93,9 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;ba
 .mini-bar{background:rgba(255,255,255,0.1);border-radius:6px;height:4px;flex:1;overflow:hidden}
 .mini-fill{height:100%;border-radius:6px;transition:width 0.3s}
 
-/* Admin */
 .admin-btn{width:48px;height:48px;border-radius:12px;border:1px solid rgba(239,68,68,0.3)!important;background:rgba(239,68,68,0.1);color:#EF4444;font-size:22px;display:flex;align-items:center;justify-content:center}
 .admin-btn:active{background:rgba(239,68,68,0.25)}
 
-/* Rules */
 .rule{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
 .rule-icon{font-size:22px}
 .rule-label{font-weight:600;font-size:13px}
@@ -113,16 +103,29 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;ba
 .rule-pts{font-weight:800;font-size:18px}
 .tip{background:rgba(59,130,246,0.1);border-radius:12px;padding:14px;margin-top:14px;border:1px solid rgba(59,130,246,0.2)}
 
-/* Toast */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:#1F2937;color:#F9FAFB;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.5);z-index:200;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* Day summary */
 .day-summary{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.08)}
 .day-summary h3{font-size:14px;margin-bottom:8px;color:#9CA3AF}
 .day-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
 .day-row .lbl{color:#9CA3AF}
 .day-row .val{font-weight:700}
+
+.deadline-bar{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:10px 14px;margin-bottom:14px;text-align:center;font-size:13px}
+.deadline-bar .time{font-weight:800;color:#EF4444;font-size:16px}
+.deadline-bar .label{color:#9CA3AF;font-size:11px}
+
+.admin-section{background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.06)}
+.admin-section h3{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.admin-player-row{display:flex;align-items:center;gap:10px;padding:10px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:6px}
+.admin-player-row .emoji{font-size:22px}
+.admin-player-row .info{flex:1}
+.admin-player-row .info .name{font-weight:600;font-size:14px}
+.admin-player-row .info .status{font-size:11px;color:#6B7280}
+.admin-edit-input{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 12px;color:#F9FAFB;font-size:14px;width:100%}
+.admin-small-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;transition:all 0.15s}
+.admin-small-btn:active{transform:scale(0.96)}
 </style>
 </head>
 <body>
@@ -140,7 +143,7 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;ba
     <button class="header-logout" onclick="logout()">החלף</button>
     <div class="header-center">
       <h1>🎯 הימורי המלחמה</h1>
-      <p>8 שכנים, הימור אחד, מי ינצח?</p>
+      <div class="subtitle">קומפלקס דן שומרון 11</div>
     </div>
     <div class="header-user" id="headerUser"></div>
   </div>
@@ -149,7 +152,7 @@ button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;ba
     <button class="tab active" data-tab="bet" onclick="switchTab('bet')"><span class="icon">🎯</span>הימור</button>
     <button class="tab" data-tab="leaderboard" onclick="switchTab('leaderboard')"><span class="icon">🏆</span>דירוג</button>
     <button class="tab" data-tab="players" onclick="switchTab('players')"><span class="icon">👥</span>שחקנים</button>
-    <button class="tab" data-tab="admin" onclick="switchTab('admin')"><span class="icon">📊</span>מנהל</button>
+    <button class="tab" data-tab="admin" onclick="switchTab('admin')"><span class="icon">⚙️</span>ניהול</button>
     <button class="tab" data-tab="rules" onclick="switchTab('rules')"><span class="icon">📏</span>חוקים</button>
   </div>
 
@@ -185,45 +188,97 @@ const firebaseConfig = {
 // ========================
 // DATA
 // ========================
-const PLAYERS = [
+const DEFAULT_PLAYERS = [
   { id: 1, name: "יוני", emoji: "🎯", color: "#3B82F6" },
-  { id: 2, name: "אבי", emoji: "🔥", color: "#EF4444" },
-  { id: 3, name: "דני", emoji: "⚡", color: "#F59E0B" },
-  { id: 4, name: "מיכל", emoji: "🌟", color: "#10B981" },
-  { id: 5, name: "רון", emoji: "🎲", color: "#8B5CF6" },
-  { id: 6, name: "שרה", emoji: "💎", color: "#EC4899" },
-  { id: 7, name: "גיל", emoji: "🏆", color: "#F97316" },
-  { id: 8, name: "נועה", emoji: "✨", color: "#06B6D4" },
+  { id: 2, name: "דודי", emoji: "🔥", color: "#EF4444" },
+  { id: 3, name: "נועם", emoji: "⚡", color: "#F59E0B" },
+  { id: 4, name: "נטע הבן", emoji: "🌟", color: "#10B981" },
+  { id: 5, name: "נטע הבת", emoji: "💎", color: "#EC4899" },
+  { id: 6, name: "ליאורה", emoji: "✨", color: "#06B6D4" },
+  { id: 7, name: "שני", emoji: "🎲", color: "#8B5CF6" },
+  { id: 8, name: "ליטל", emoji: "🏆", color: "#F97316" },
+  { id: 9, name: "גל", emoji: "🌊", color: "#14B8A6" },
+  { id: 10, name: "גיא", emoji: "🦁", color: "#A855F7" },
 ];
+
+let PLAYERS = [...DEFAULT_PLAYERS];
 
 const CATEGORIES = [
-  { id: "alerts", label: "מספר אזעקות", icon: "🚨", type: "number", description: "כמה אזעקות יהיו היום?" },
-  { id: "falls", label: "מספר נפילות", icon: "💥", type: "number", description: "כמה נפילות יהיו היום?" },
-  { id: "timeRange", label: "שעת אזעקה ראשונה", icon: "⏰", type: "time", description: "מתי תהיה האזעקה הראשונה?" },
+  { id: "alerts", label: "מספר אזעקות", icon: "🚨", type: "number", description: "כמה אזעקות יהיו מחר?" },
+  { id: "falls", label: "מספר נפילות", icon: "💥", type: "number", description: "כמה נפילות יהיו מחר?" },
+  { id: "timeRange", label: "שעת אזעקה ראשונה", icon: "⏰", type: "time", description: "מתי תהיה האזעקה הראשונה מחר?" },
 ];
 
-const TIME_OPTIONS = ["00:00-04:00","04:00-08:00","08:00-12:00","12:00-16:00","16:00-20:00","20:00-00:00","לא תהיה"];
+const TIME_OPTIONS = [
+  "00:00-02:00","02:00-04:00","04:00-06:00","06:00-08:00",
+  "08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00",
+  "16:00-18:00","18:00-20:00","20:00-22:00","22:00-00:00",
+  "לא תהיה"
+];
 
 const ADMIN_ID = 1; // יוני is admin
+const BET_DEADLINE_HOUR = 21; // 21:00
 
 // ========================
 // STATE
 // ========================
 let db;
 let currentUserId = null;
-let gameData = { bets: {}, results: {}, scores: {} };
+let gameData = { bets: {}, results: {}, scores: {}, registrations: {} };
 let todayKey = getTodayKey();
+let tomorrowKey = getTomorrowKey();
+let deadlineTimer = null;
 
 function getTodayKey() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-function getUser() { return PLAYERS.find(p => p.id === currentUserId); }
-
-function formatDate() {
-  return new Date().toLocaleDateString("he-IL", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+function getTomorrowKey() {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
+
+function getBetDayKey() {
+  // Bets are always for tomorrow
+  return tomorrowKey;
+}
+
+function getResultsDayKey() {
+  // Results are entered for today
+  return todayKey;
+}
+
+function formatDate(key) {
+  if (!key) return new Date().toLocaleDateString("he-IL", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+  const [y,m,d] = key.split('-').map(Number);
+  return new Date(y, m-1, d).toLocaleDateString("he-IL", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+}
+
+function formatTomorrow() {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return d.toLocaleDateString("he-IL", { weekday:"long", month:"long", day:"numeric" });
+}
+
+function isBettingOpen() {
+  const now = new Date();
+  return now.getHours() < BET_DEADLINE_HOUR;
+}
+
+function getTimeToDeadline() {
+  const now = new Date();
+  const deadline = new Date(now);
+  deadline.setHours(BET_DEADLINE_HOUR, 0, 0, 0);
+  if (now >= deadline) return "ההימורים סגורים להיום";
+  const diff = deadline - now;
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  return `${h} שעות ו-${m} דקות`;
+}
+
+function getUser() { return PLAYERS.find(p => p.id === currentUserId); }
 
 // ========================
 // FIREBASE
@@ -233,8 +288,9 @@ function initFirebase() {
     firebase.initializeApp(firebaseConfig);
     db = firebase.database();
     listenToData();
+    listenToPlayers();
+    listenToRegistrations();
   } catch(e) {
-    // Fallback to localStorage if Firebase fails
     console.warn("Firebase unavailable, using localStorage fallback");
     db = null;
     loadLocalData();
@@ -244,15 +300,17 @@ function initFirebase() {
 
 function listenToData() {
   if (!db) return;
+  const betDay = getBetDayKey();
+  const resDay = getResultsDayKey();
 
-  // Listen to today's bets
-  db.ref(`days/${todayKey}/bets`).on('value', snap => {
+  // Listen to tomorrow's bets (what people are betting on)
+  db.ref(`days/${betDay}/bets`).on('value', snap => {
     gameData.bets = snap.val() || {};
     renderActiveScreen();
   });
 
-  // Listen to today's results
-  db.ref(`days/${todayKey}/results`).on('value', snap => {
+  // Listen to today's results (what admin enters)
+  db.ref(`days/${resDay}/results`).on('value', snap => {
     gameData.results = snap.val() || {};
     renderActiveScreen();
   });
@@ -264,9 +322,32 @@ function listenToData() {
   });
 }
 
+function listenToPlayers() {
+  if (!db) return;
+  db.ref('players').on('value', snap => {
+    const data = snap.val();
+    if (data) {
+      PLAYERS = Object.values(data).sort((a,b) => a.id - b.id);
+    }
+    renderActiveScreen();
+  });
+}
+
+function listenToRegistrations() {
+  if (!db) return;
+  db.ref('registrations').on('value', snap => {
+    gameData.registrations = snap.val() || {};
+    // Re-render login if visible
+    if (document.getElementById('login').style.display !== 'none') {
+      showLogin();
+    }
+  });
+}
+
 function saveBet(userId, bets) {
+  const betDay = getBetDayKey();
   if (db) {
-    db.ref(`days/${todayKey}/bets/${userId}`).set(bets);
+    db.ref(`days/${betDay}/bets/${userId}`).set(bets);
   } else {
     if (!gameData.bets) gameData.bets = {};
     gameData.bets[userId] = bets;
@@ -276,8 +357,9 @@ function saveBet(userId, bets) {
 }
 
 function saveResults(results) {
+  const resDay = getResultsDayKey();
   if (db) {
-    db.ref(`days/${todayKey}/results`).set(results);
+    db.ref(`days/${resDay}/results`).set(results);
   } else {
     gameData.results = results;
     saveLocal();
@@ -295,28 +377,49 @@ function saveScores(scores) {
   }
 }
 
+function registerPlayer(playerId) {
+  if (db) {
+    const deviceId = getDeviceId();
+    db.ref(`registrations/${playerId}`).set({ deviceId, timestamp: Date.now() });
+  }
+  gameData.registrations[playerId] = { deviceId: getDeviceId(), timestamp: Date.now() };
+}
+
+function getDeviceId() {
+  let id = localStorage.getItem('warBets_deviceId');
+  if (!id) {
+    id = 'dev_' + Math.random().toString(36).substr(2, 12);
+    localStorage.setItem('warBets_deviceId', id);
+  }
+  return id;
+}
+
+function savePlayersToFirebase() {
+  if (db) {
+    const data = {};
+    PLAYERS.forEach(p => { data[p.id] = p; });
+    db.ref('players').set(data);
+  }
+}
+
 function loadLocalData() {
   try {
-    const s = localStorage.getItem('warBets_v2');
+    const s = localStorage.getItem('warBets_v3');
     if (s) {
       const d = JSON.parse(s);
-      if (d.todayKey === todayKey) {
-        gameData = d.gameData || { bets:{}, results:{}, scores:{} };
-      } else {
-        gameData = { bets:{}, results:{}, scores: d.gameData?.scores || {} };
-      }
+      gameData = d.gameData || { bets:{}, results:{}, scores:{}, registrations:{} };
     }
   } catch(e) {}
 }
 
 function saveLocal() {
   try {
-    localStorage.setItem('warBets_v2', JSON.stringify({ todayKey, gameData }));
+    localStorage.setItem('warBets_v3', JSON.stringify({ gameData }));
   } catch(e) {}
 }
 
 // ========================
-// LOGIN
+// LOGIN & REGISTRATION
 // ========================
 function showLoginOrApp() {
   document.getElementById('loading').style.display = 'none';
@@ -334,14 +437,23 @@ function showLogin() {
   document.getElementById('login').style.display = '';
   document.getElementById('app').style.display = 'none';
 
+  const deviceId = getDeviceId();
+  const regs = gameData.registrations || {};
+
   let html = `
     <div style="font-size:48px;margin-bottom:8px">🎯🚀</div>
     <div class="login-title">הימורי המלחמה</div>
-    <div class="login-sub">בחר את השם שלך</div>
+    <div class="login-sub">קומפלקס דן שומרון 11</div>
+    <div class="login-location">בחר את השם שלך כדי להירשם</div>
     <div class="login-grid">`;
 
   PLAYERS.forEach(p => {
-    html += `<button class="login-btn" style="border-color:${p.color}33" onclick="loginAs(${p.id})">
+    const reg = regs[p.id];
+    const takenByOther = reg && reg.deviceId && reg.deviceId !== deviceId;
+    const takenByMe = reg && reg.deviceId === deviceId;
+    const cls = takenByOther ? 'login-btn taken' : 'login-btn';
+
+    html += `<button class="${cls}" style="border-color:${p.color}33${takenByMe ? `;background:${p.color}22` : ''}" onclick="${takenByOther ? '' : `loginAs(${p.id})`}">
       <span class="emoji">${p.emoji}</span>
       <span class="name" style="color:${p.color}">${p.name}</span>
     </button>`;
@@ -354,6 +466,7 @@ function showLogin() {
 function loginAs(id) {
   currentUserId = id;
   localStorage.setItem('warBets_userId', id);
+  registerPlayer(id);
   showApp();
 }
 
@@ -366,12 +479,38 @@ function logout() {
 function showApp() {
   document.getElementById('login').style.display = 'none';
   document.getElementById('app').style.display = '';
+
+  // Hide admin tab for non-admins
+  const adminTab = document.querySelector('.tab[data-tab="admin"]');
+  if (currentUserId !== ADMIN_ID) {
+    adminTab.style.display = 'none';
+  } else {
+    adminTab.style.display = '';
+  }
+
   const u = getUser();
+  if (!u) { logout(); return; }
   document.getElementById('headerUser').innerHTML = `${u.emoji} ${u.name}`;
   document.getElementById('headerUser').style.background = u.color + '22';
   document.getElementById('headerUser').style.color = u.color;
   document.getElementById('headerUser').style.border = `2px solid ${u.color}`;
   renderAllScreens();
+  startDeadlineTimer();
+}
+
+// ========================
+// DEADLINE TIMER
+// ========================
+function startDeadlineTimer() {
+  if (deadlineTimer) clearInterval(deadlineTimer);
+  deadlineTimer = setInterval(() => {
+    const betEl = document.getElementById('deadline-display');
+    if (betEl) {
+      betEl.innerHTML = isBettingOpen()
+        ? `<span class="label">ההימורים נסגרים בעוד</span><br><span class="time">${getTimeToDeadline()}</span>`
+        : `<span class="time" style="color:#EF4444">ההימורים סגורים להיום</span><br><span class="label">יפתחו מחר בבוקר</span>`;
+    }
+  }, 30000);
 }
 
 // ========================
@@ -416,29 +555,49 @@ function renderBet() {
   const filled = CATEGORIES.filter(c => ub[c.id] !== undefined && ub[c.id] !== "").length;
   const total = CATEGORIES.length;
   const submitted = ub._submitted;
+  const open = isBettingOpen();
 
   let html = `
     <div style="text-align:center;margin-bottom:14px">
       <div style="font-size:36px">${u.emoji}</div>
       <h2 style="margin:6px 0 2px;font-size:20px">ההימור של ${u.name}</h2>
-      <p style="color:#9CA3AF;font-size:12px">${formatDate()}</p>
+      <p style="color:#60A5FA;font-size:13px;font-weight:600">ליום ${formatTomorrow()}</p>
+      <p style="color:#9CA3AF;font-size:12px;margin-top:2px">${formatDate()}</p>
     </div>`;
+
+  // Deadline bar
+  html += `<div class="deadline-bar" id="deadline-display">`;
+  if (open) {
+    html += `<span class="label">ההימורים נסגרים בעוד</span><br><span class="time">${getTimeToDeadline()}</span>`;
+  } else {
+    html += `<span class="time" style="color:#EF4444">ההימורים סגורים להיום</span><br><span class="label">יפתחו מחר בבוקר</span>`;
+  }
+  html += `</div>`;
 
   if (submitted) {
     html += `<div style="text-align:center;padding:20px;background:rgba(16,185,129,0.1);border-radius:12px;border:1px solid rgba(16,185,129,0.2);margin-bottom:14px">
       <div style="font-size:40px;margin-bottom:8px">✅</div>
       <div style="font-weight:700;font-size:16px;color:#10B981">ההימור נשלח!</div>
-      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">מחכים לתוצאות סוף היום</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">מחכים לתוצאות של מחר</div>
     </div>`;
 
-    // Show what was bet
-    html += `<div class="day-summary"><h3>ההימור שלך להיום:</h3>`;
+    html += `<div class="day-summary"><h3>ההימור שלך ל-${formatTomorrow()}:</h3>`;
     CATEGORIES.forEach(cat => {
       const v = ub[cat.id];
       html += `<div class="day-row"><span class="lbl">${cat.icon} ${cat.label}</span><span class="val">${v !== undefined ? v : '-'}</span></div>`;
     });
     html += `</div>`;
 
+    document.getElementById('screen-bet').innerHTML = html;
+    return;
+  }
+
+  if (!open) {
+    html += `<div style="text-align:center;padding:30px 20px;background:rgba(239,68,68,0.1);border-radius:12px;border:1px solid rgba(239,68,68,0.2)">
+      <div style="font-size:40px;margin-bottom:8px">🔒</div>
+      <div style="font-weight:700;font-size:16px;color:#EF4444">ההימורים סגורים</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">אפשר להמר עד 21:00 בלבד</div>
+    </div>`;
     document.getElementById('screen-bet').innerHTML = html;
     return;
   }
@@ -460,7 +619,7 @@ function renderBet() {
 
     if (cat.type === "number") {
       html += `<div class="num-row">
-        <button class="num-btn" onclick="chgBet('${cat.id}',-1)">−</button>
+        <button class="num-btn" onclick="chgBet('${cat.id}',-1)">&#8722;</button>
         <div class="num-val" style="color:${u.color}">${val || 0}</div>
         <button class="num-btn" onclick="chgBet('${cat.id}',1)">+</button>
       </div>`;
@@ -483,6 +642,7 @@ function renderBet() {
 }
 
 function chgBet(catId, delta) {
+  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}) };
   ub[catId] = Math.max(0, (ub[catId] || 0) + delta);
@@ -491,6 +651,7 @@ function chgBet(catId, delta) {
 }
 
 function setBet(catId, val) {
+  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}) };
   ub[catId] = val;
@@ -499,6 +660,7 @@ function setBet(catId, val) {
 }
 
 function submitBet() {
+  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}), _submitted: true };
   saveBet(u.id, ub);
@@ -517,7 +679,6 @@ function renderLeaderboard() {
 
   let html = `<h2 class="section-title">🏆 טבלת המובילים</h2>`;
 
-  // Check if any scores exist
   const hasScores = sorted.some(p => p.score > 0);
 
   if (!hasScores) {
@@ -530,21 +691,24 @@ function renderLeaderboard() {
     return;
   }
 
-  html += `<div class="podium">`;
-  order.forEach(idx => {
-    const p = sorted[idx];
-    const h = [130,95,75][idx];
-    html += `<div class="pod-item">
-      <div class="pod-emoji">${p.emoji}</div>
-      <div class="pod-name">${p.name}</div>
-      <div class="pod-bar" style="height:${h}px;background:linear-gradient(180deg,${p.color},${p.color}88)">
-        <span class="pod-medal">${medals[idx]}</span>
-        <span class="pod-score">${p.score}</span>
-        <span class="pod-pts">נקודות</span>
-      </div>
-    </div>`;
-  });
-  html += `</div>`;
+  if (sorted.length >= 3) {
+    html += `<div class="podium">`;
+    order.forEach(idx => {
+      if (idx >= sorted.length) return;
+      const p = sorted[idx];
+      const h = [130,95,75][idx];
+      html += `<div class="pod-item">
+        <div class="pod-emoji">${p.emoji}</div>
+        <div class="pod-name">${p.name}</div>
+        <div class="pod-bar" style="height:${h}px;background:linear-gradient(180deg,${p.color},${p.color}88)">
+          <span class="pod-medal">${medals[idx]}</span>
+          <span class="pod-score">${p.score}</span>
+          <span class="pod-pts">נקודות</span>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
 
   sorted.slice(3).forEach((p,i) => {
     html += `<div class="p-row">
@@ -563,7 +727,7 @@ function renderLeaderboard() {
 // ========================
 function renderPlayers() {
   let html = `<h2 class="section-title">👥 סטטוס שחקנים</h2>
-    <p class="section-sub">מי כבר הימר היום?</p>`;
+    <p class="section-sub">מי כבר הימר ל-${formatTomorrow()}?</p>`;
 
   PLAYERS.forEach(p => {
     const pb = gameData.bets[p.id] || {};
@@ -591,34 +755,22 @@ function renderPlayers() {
 // ========================
 function renderAdmin() {
   const isAdmin = currentUserId === ADMIN_ID;
-  const res = gameData.results || {};
-
   if (!isAdmin) {
-    let html = `<div style="text-align:center;padding:40px 20px">
-      <div style="font-size:48px;margin-bottom:12px">🔒</div>
-      <div style="font-weight:700;font-size:16px;margin-bottom:4px">מסך מנהל</div>
-      <div style="color:#9CA3AF;font-size:13px">רק ${PLAYERS[0].name} יכול להזין תוצאות</div>
-    </div>`;
-
-    // Show results if already entered
-    if (Object.keys(res).length > 0) {
-      html += `<div class="day-summary"><h3>תוצאות היום:</h3>`;
-      CATEGORIES.forEach(cat => {
-        const v = res[cat.id];
-        html += `<div class="day-row"><span class="lbl">${cat.icon} ${cat.label}</span><span class="val">${v !== undefined ? v : 'טרם הוזן'}</span></div>`;
-      });
-      html += `</div>`;
-    }
-
-    document.getElementById('screen-admin').innerHTML = html;
+    document.getElementById('screen-admin').innerHTML = '';
     return;
   }
 
+  const res = gameData.results || {};
+
   let html = `<div style="text-align:center;margin-bottom:14px">
-    <div style="font-size:36px">📊</div>
-    <h2 style="margin:6px 0 2px;font-size:20px">הזנת תוצאות</h2>
+    <div style="font-size:36px">⚙️</div>
+    <h2 style="margin:6px 0 2px;font-size:20px">ניהול המשחק</h2>
     <p style="color:#9CA3AF;font-size:12px">${formatDate()}</p>
   </div>`;
+
+  // ---- RESULTS SECTION ----
+  html += `<div class="admin-section">
+    <h3>📊 הזנת תוצאות ליום ${formatDate()}</h3>`;
 
   CATEGORIES.forEach(cat => {
     const val = res[cat.id];
@@ -630,7 +782,7 @@ function renderAdmin() {
 
     if (cat.type === "number") {
       html += `<div class="num-row">
-        <button class="admin-btn" onclick="chgRes('${cat.id}',-1)">−</button>
+        <button class="admin-btn" onclick="chgRes('${cat.id}',-1)">&#8722;</button>
         <div class="num-val" style="color:#EF4444">${val || 0}</div>
         <button class="admin-btn" onclick="chgRes('${cat.id}',1)">+</button>
       </div>`;
@@ -646,11 +798,63 @@ function renderAdmin() {
   });
 
   html += `<button class="big-btn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff" onclick="calcScores()">חשב ניקוד ופרסם תוצאות 🏆</button>`;
+  html += `</div>`;
 
-  // Reset button
-  html += `<button class="big-btn" style="background:rgba(255,255,255,0.05);color:#6B7280;margin-top:8px;font-size:13px" onclick="resetDay()">🔄 אפס יום חדש</button>`;
+  // ---- PLAYERS MANAGEMENT ----
+  html += `<div class="admin-section">
+    <h3>👥 ניהול משתתפים</h3>`;
+
+  PLAYERS.forEach(p => {
+    const reg = gameData.registrations[p.id];
+    const isReg = !!reg;
+    html += `<div class="admin-player-row">
+      <span class="emoji">${p.emoji}</span>
+      <div class="info">
+        <div class="name">${p.name}</div>
+        <div class="status">${isReg ? '✅ רשום' : '⬜ לא נרשם'}</div>
+      </div>
+      <button class="admin-small-btn" style="background:rgba(59,130,246,0.15);color:#3B82F6" onclick="editPlayerName(${p.id})">✏️ ערוך</button>
+    </div>`;
+  });
+
+  html += `<button class="big-btn" style="background:rgba(16,185,129,0.15);color:#10B981;font-size:14px" onclick="addNewPlayer()">+ הוסף משתתף</button>`;
+  html += `</div>`;
+
+  // ---- GAME CONTROLS ----
+  html += `<div class="admin-section">
+    <h3>🔧 פעולות</h3>
+    <button class="big-btn" style="background:rgba(245,158,11,0.15);color:#F59E0B;font-size:14px;margin-top:0" onclick="resetBets()">🔄 אפס הימורים של מחר</button>
+    <button class="big-btn" style="background:rgba(239,68,68,0.15);color:#EF4444;font-size:14px" onclick="resetAllScores()">🗑️ אפס את כל הניקוד</button>
+  </div>`;
 
   document.getElementById('screen-admin').innerHTML = html;
+}
+
+function editPlayerName(playerId) {
+  const player = PLAYERS.find(p => p.id === playerId);
+  if (!player) return;
+  const newName = prompt(`שם חדש עבור ${player.name}:`, player.name);
+  if (newName && newName.trim()) {
+    player.name = newName.trim();
+    savePlayersToFirebase();
+    toast(`✅ השם עודכן ל-${newName.trim()}`);
+    renderAllScreens();
+  }
+}
+
+function addNewPlayer() {
+  const name = prompt('שם המשתתף החדש:');
+  if (!name || !name.trim()) return;
+  const emojis = ["🌟","💫","🎪","🎭","🎨","🎵","🔮","🌈","🍀","🦊","🐯","🦅"];
+  const colors = ["#F43F5E","#D946EF","#0EA5E9","#84CC16","#FB923C","#64748B"];
+  const newId = Math.max(...PLAYERS.map(p => p.id)) + 1;
+  const emoji = emojis[newId % emojis.length];
+  const color = colors[newId % colors.length];
+
+  PLAYERS.push({ id: newId, name: name.trim(), emoji, color });
+  savePlayersToFirebase();
+  toast(`✅ ${name.trim()} נוסף!`);
+  renderAllScreens();
 }
 
 function chgRes(catId, delta) {
@@ -673,14 +877,29 @@ function calcScores() {
     return;
   }
 
-  // Save results first
+  // Save results
   saveResults(res);
 
+  // Scores are calculated based on today's bets (which were placed yesterday for today)
+  // We need to read today's bets from Firebase
+  const resDay = getResultsDayKey();
+
+  if (db) {
+    db.ref(`days/${resDay}/bets`).once('value', snap => {
+      const todayBets = snap.val() || {};
+      doCalcScores(todayBets, res);
+    });
+  } else {
+    // Fallback: use current bets
+    doCalcScores(gameData.bets, res);
+  }
+}
+
+function doCalcScores(bets, res) {
   const newScores = { ...(gameData.scores || {}) };
 
-  let summary = [];
   PLAYERS.forEach(p => {
-    const pb = gameData.bets[p.id];
+    const pb = bets[p.id];
     if (!pb || !pb._submitted) return;
 
     let dayScore = 0;
@@ -706,24 +925,34 @@ function calcScores() {
     });
 
     newScores[p.id] = (newScores[p.id] || 0) + dayScore;
-    summary.push({ name: p.name, emoji: p.emoji, pts: dayScore });
   });
 
   saveScores(newScores);
   toast('🏆 הניקוד חושב ופורסם!');
-
   setTimeout(() => switchTab('leaderboard'), 1000);
 }
 
-function resetDay() {
-  if (!confirm('לאפס את כל ההימורים של היום?')) return;
+function resetBets() {
+  if (!confirm('לאפס את כל ההימורים של מחר?')) return;
+  const betDay = getBetDayKey();
   if (db) {
-    db.ref(`days/${todayKey}`).remove();
+    db.ref(`days/${betDay}/bets`).remove();
   }
   gameData.bets = {};
-  gameData.results = {};
   saveLocal();
-  toast('🔄 יום חדש!');
+  toast('🔄 ההימורים אופסו!');
+  renderAllScreens();
+}
+
+function resetAllScores() {
+  if (!confirm('לאפס את כל הניקוד המצטבר? פעולה זו בלתי הפיכה!')) return;
+  if (!confirm('בטוח? כל הנקודות יימחקו')) return;
+  if (db) {
+    db.ref('scores').remove();
+  }
+  gameData.scores = {};
+  saveLocal();
+  toast('🗑️ כל הניקוד אופס');
   renderAllScreens();
 }
 
@@ -733,7 +962,7 @@ function resetDay() {
 function renderRules() {
   const rules = [
     { pts:10, label:"דיוק מושלם", desc:"ניחשת בדיוק!", color:"#10B981", icon:"🎯" },
-    { pts:5, label:"קרוב מאוד", desc:"הפרש של 1", color:"#3B82F6", icon:"🔥" },
+    { pts:5, label:"קרוב מאוד", desc:"הפרש של 1 (או טווח צמוד)", color:"#3B82F6", icon:"🔥" },
     { pts:3, label:"קרוב", desc:"הפרש של 2", color:"#F59E0B", icon:"👍" },
     { pts:1, label:"כיוון נכון", desc:"הפרש של 3-5", color:"#6B7280", icon:"↕️" },
     { pts:0, label:"פספוס", desc:"הפרש מעל 5", color:"#EF4444", icon:"❌" },
@@ -751,10 +980,11 @@ function renderRules() {
   html += `<div class="tip">
     <div style="font-weight:600;color:#3B82F6;margin-bottom:6px;font-size:14px">💡 איך זה עובד?</div>
     <div style="color:#9CA3AF;font-size:13px;line-height:1.7">
-      כל בוקר כל אחד מזין את ההימור שלו על 3 קטגוריות.<br>
-      בסוף היום המנהל (יוני) מזין את התוצאות בפועל.<br>
+      כל יום עד 21:00 כל אחד מזין את ההימור שלו על 3 קטגוריות ליום המחרת.<br>
+      למחרת, המנהל (יוני) מזין את התוצאות בפועל.<br>
       הניקוד מחושב אוטומטית לפי קרבה לתוצאה.<br>
-      הנקודות מצטברות מיום ליום!
+      הנקודות מצטברות מיום ליום!<br><br>
+      <strong>שעת אזעקה ראשונה:</strong> הטווחים בחלוקה של שעתיים.
     </div>
   </div>`;
 
