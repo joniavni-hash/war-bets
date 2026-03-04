@@ -58,7 +58,7 @@ input{font-family:inherit}
 .num-btn:active{background:rgba(255,255,255,0.15)}
 .num-val{flex:1;text-align:center;font-size:30px;font-weight:800}
 
-.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips{display:flex;flew-wrap:wrap;gap:6px}
 .chip{padding:8px 12px;border-radius:10px;font-size:12px;border:1px solid rgba(255,255,255,0.1)!important;background:rgba(255,255,255,0.03);color:#9CA3AF;font-weight:400;transition:all 0.15s}
 .chip:active{transform:scale(0.96)}
 .chip.sel{font-weight:600;border-width:2px!important}
@@ -217,6 +217,7 @@ const TIME_OPTIONS = [
 ];
 
 const ADMIN_ID = 1; // יוני is admin
+const ADMIN_PASSWORD = 'dan11'; // סיסמא לכניסה כיוני
 const BET_DEADLINE_HOUR = 21; // 21:00
 
 // ========================
@@ -391,7 +392,7 @@ function getDeviceId() {
     id = 'dev_' + Math.random().toString(36).substr(2, 12);
     localStorage.setItem('warBets_deviceId', id);
   }
-  return id;
+  teturn id;
 }
 
 function savePlayersToFirebase() {
@@ -419,7 +420,7 @@ function saveLocal() {
 }
 
 // ========================
-// LOGIN & REGISTRATION
+// LOGIN & REGISTRAU	ON
 // ========================
 function showLoginOrApp() {
   document.getElementById('loading').style.display = 'none';
@@ -428,9 +429,17 @@ function showLoginOrApp() {
   if (saved) {
     currentUserId = parseInt(saved);
     showApp();
-  } else {
-    showLogin();
+    return;
   }
+  // אם המכשיר כבר רשום - כניסה ישירה ללא בחירה מחדש
+  const registered = localStorage.getItem('warBets_registeredPlayerId');
+  if (registered) {
+    currentUserId = parseInt(registered);
+    localStorage.setItem('warBets_userId', registered);
+    showApp();
+    return;
+  }
+  showLogin();
 }
 
 function showLogin() {
@@ -447,15 +456,25 @@ function showLogin() {
     <div class="login-location">בחר את השם שלך כדי להירשם</div>
     <div class="login-grid">`;
 
+  // If device already registered, lock to that player only
+  const myRegisteredId = localStorage.getItem('warBets_registeredPlayerId');
+  const myRegInt = myRegisteredId ? parseInt(myRegisteredId) : null;
+
   PLAYERS.forEach(p => {
     const reg = regs[p.id];
     const takenByOther = reg && reg.deviceId && reg.deviceId !== deviceId;
     const takenByMe = reg && reg.deviceId === deviceId;
-    const cls = takenByOther ? 'login-btn taken' : 'login-btn';
+    // If this device already picked someone, lock out all others
+    const lockedOut = myRegInt && p.id !== myRegInt;
+    const disabled = takenByOther || lockedOut;
+    const cls = disabled ? 'login-btn taken' : 'login-btn';
+    // יוני requires password on first registration; once registered, direct login
+    const onclickFn = disabled ? '' : (p.id === ADMIN_ID && !takenByMe ? 'loginAsAdmin()' : `loginAs(${p.id})`);
 
-    html += `<button class="${cls}" style="border-color:${p.color}33${takenByMe ? `;background:${p.color}22` : ''}" onclick="${takenByOther ? '' : `loginAs(${p.id})`}">
+    html += `<button class="${cls}" style="border-color:${p.color}33${takenByMe ? `;background:${p.color}22` : ''}" onclick="${onclickFn}">
       <span class="emoji">${p.emoji}</span>
       <span class="name" style="color:${p.color}">${p.name}</span>
+      ${lockedOut ? '<span style="position:absolute;top:6px;left:6px;font-size:11px">🔒</span>' : ''}
     </button>`;
   });
 
@@ -466,8 +485,47 @@ function showLogin() {
 function loginAs(id) {
   currentUserId = id;
   localStorage.setItem('warBets_userId', id);
+  localStorage.setItem('warBets_registeredPlayerId', id); // נעל את הבחירה לתמיד
   registerPlayer(id);
   showApp();
+}
+
+function loginAsAdmin() {
+  // Show password modal
+  const overlay = document.createElement('div');
+  overlay.id = 'pw-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px';
+  overlay.innerHTML = `
+    <div style="background:#1F2937;border-radius:16px;padding:28px 24px;width:100%;max-width:320px;text-align:center;border:1px solid rgba(255,255,255,0.1)">
+      <div style="font-size:36px;margin-bottom:12px">🔐</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:6px">כניסה כיוני</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-bottom:20px">הזן סיסמא כדי להמשיך</div>
+      <input id="pw-input" type="password" placeholder="סיסמא"
+        style="width:100%;padding:13px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#F9FAFB;font-size:18px;text-align:center;margin-bottom:10px;outline:none;direction:ltr"
+        onkeydown="if(event.key==='Enter')checkAdminPassword()">
+      <div id="pw-error" style="color:#EF4444;font-size:12px;margin-bottom:12px;min-height:16px"></div>
+      <div style="display:flex;gap:10px">
+        <button onclick="document.getElementById('pw-overlay').remove()"
+          style="flex:1;padding:13px;border-radius:10px;background:rgba(255,255,255,0.05);color:#9CA3AF;font-size:14px;font-weight:600;border:none;cursor:pointer">ביטול</button>
+        <button onclick="checkAdminPassword()"
+          style="flex:1;padding:13px;border-radius:10px;background:#3B82F6;color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">כניסה</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => { const inp = document.getElementById('pw-input'); if(inp) inp.focus(); }, 100);
+}
+
+function checkAdminPassword() {
+  const input = document.getElementById('pw-input');
+  if (!input) return;
+  if (input.value === ADMIN_PASSWORD) {
+    document.getElementById('pw-overlay').remove();
+    loginAs(ADMIN_ID);
+  } else {
+    document.getElementById('pw-error').textContent = 'סיסמא שגויה, נסה שוב';
+    input.value = '';
+    input.focus();
+  }
 }
 
 function logout() {
@@ -964,8 +1022,8 @@ function renderRules() {
     { pts:10, label:"דיוק מושלם", desc:"ניחשת בדיוק!", color:"#10B981", icon:"🎯" },
     { pts:5, label:"קרוב מאוד", desc:"הפרש של 1 (או טווח צמוד)", color:"#3B82F6", icon:"🔥" },
     { pts:3, label:"קרוב", desc:"הפרש של 2", color:"#F59E0B", icon:"👍" },
-    { pts:1, label:"כיוון נכון", desc:"הפרש של 3-5", color:"#6B7280", icon:"↕️" },
-    { pts:0, label:"פספוס", desc:"הפרש מעל 5", color:"#EF4444", icon:"❌" },
+    { pts:1, label:"כיוון נכון", desc:"הפרש של 3-5", color:"#6B7280", icon":"↕️" },
+    { pts:0, label:"פספוס", desc:"הפרש מח� 5", color:"#EF4444", icon:"❌" },
   ];
 
   let html = `<h2 class="section-title">📏 חוקי הניקוד</h2>`;
