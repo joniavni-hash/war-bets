@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#111827">
+<title>הימורי המלחמה 🎯</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#111827;color:#F9FAFB;min-height:100vh;min-height:100dvh;direction:rtl;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;-webkit-appearance:none;border:none;background:none}
+
+/* Loading */
+.loading-screen{position:fixed;inset:0;background:#111827;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px}
+.loading-screen .spinner{width:40px;height:40px;border:3px solid rgba(59,130,246,0.2);border-top-color:#3B82F6;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Login */
+.login-screen{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.login-title{font-size:28px;font-weight:800;margin:12px 0 4px}
+.login-sub{color:#9CA3AF;font-size:14px;margin-bottom:32px}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px}
+.login-btn{padding:14px;border-radius:14px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:10px;transition:all 0.15s}
+.login-btn:active{transform:scale(0.97)}
+.login-btn .emoji{font-size:28px}
+.login-btn .name{font-weight:600;font-size:15px}
+
+/* Header */
+.header{background:linear-gradient(135deg,#1E3A5F,#0F172A);padding:14px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between}
+.header-center h1{font-size:18px;font-weight:800}
+.header-center p{color:#9CA3AF;font-size:11px}
+.header-user{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:13px;font-weight:600}
+.header-logout{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.05);color:#9CA3AF;font-size:12px}
+
+/* Tabs */
+.tabs{display:flex;background:#0F172A;border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:50}
+.tab{flex:1;padding:10px 4px;border-bottom:3px solid transparent;color:#9CA3AF;font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.2s}
+.tab.active{border-bottom-color:#3B82F6;background:rgba(59,130,246,0.1);color:#3B82F6;font-weight:700}
+.tab .icon{font-size:18px}
+
+/* Content */
+.content{padding:16px;padding-bottom:40px;max-width:480px;margin:0 auto}
+.screen{display:none}
+.screen.active{display:block}
+.section-title{text-align:center;font-size:20px;margin-bottom:16px}
+.section-sub{text-align:center;color:#9CA3AF;font-size:13px;margin-bottom:16px}
+
+/* Cards */
+.card{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.05);margin-bottom:10px}
+.card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.card-icon{font-size:20px}
+.card-label{font-weight:600;font-size:14px}
+.card-desc{color:#6B7280;font-size:11px;margin-top:2px}
+
+/* Number input */
+.num-row{display:flex;align-items:center;gap:8px}
+.num-btn{width:48px;height:48px;border-radius:12px;border:1px solid rgba(255,255,255,0.15)!important;background:rgba(255,255,255,0.05);color:#F9FAFB;font-size:22px;display:flex;align-items:center;justify-content:center}
+.num-btn:active{background:rgba(255,255,255,0.15)}
+.num-val{flex:1;text-align:center;font-size:30px;font-weight:800}
+
+/* Time chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:8px 12px;border-radius:10px;font-size:13px;border:1px solid rgba(255,255,255,0.1)!important;background:rgba(255,255,255,0.03);color:#9CA3AF;font-weight:400;transition:all 0.15s}
+.chip:active{transform:scale(0.96)}
+.chip.sel{font-weight:600;border-width:2px!important}
+
+/* Progress */
+.prog-box{background:rgba(255,255,255,0.05);border-radius:12px;padding:12px;margin-bottom:14px}
+.prog-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px}
+.prog-track{background:rgba(255,255,255,0.1);border-radius:8px;height:6px;overflow:hidden}
+.prog-fill{background:linear-gradient(90deg,#3B82F6,#8B5CF6);height:100%;border-radius:8px;transition:width 0.3s}
+
+/* Submit */
+.big-btn{width:100%;padding:16px;border-radius:12px;font-size:16px;font-weight:700;margin-top:14px;transition:all 0.15s}
+.big-btn:active{transform:scale(0.98)}
+
+/* Podium */
+.podium{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-bottom:20px;padding:0 4px}
+.pod-item{text-align:center;flex:1}
+.pod-emoji{font-size:30px;margin-bottom:2px}
+.pod-name{font-weight:700;font-size:12px}
+.pod-bar{border-radius:8px 8px 0 0;margin-top:6px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.pod-medal{font-size:22px}
+.pod-score{font-weight:800;color:#fff;font-size:18px}
+.pod-pts{color:rgba(255,255,255,0.8);font-size:10px}
+
+/* Player rows */
+.p-row{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
+.p-rank{color:#6B7280;font-weight:700;font-size:16px;width:22px}
+.p-emoji{font-size:22px}
+.p-name{flex:1;font-weight:600;font-size:14px}
+.p-score{font-weight:700;font-size:17px}
+
+/* Status */
+.s-row{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
+.s-badge{padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;white-space:nowrap}
+.s-done{background:rgba(16,185,129,0.15);color:#10B981}
+.s-wait{background:rgba(245,158,11,0.15);color:#F59E0B}
+.mini-bar{background:rgba(255,255,255,0.1);border-radius:6px;height:4px;flex:1;overflow:hidden}
+.mini-fill{height:100%;border-radius:6px;transition:width 0.3s}
+
+/* Admin */
+.admin-btn{width:48px;height:48px;border-radius:12px;border:1px solid rgba(239,68,68,0.3)!important;background:rgba(239,68,68,0.1);color:#EF4444;font-size:22px;display:flex;align-items:center;justify-content:center}
+.admin-btn:active{background:rgba(239,68,68,0.25)}
+
+/* Rules */
+.rule{display:flex;align-items:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;gap:10px;margin-bottom:8px}
+.rule-icon{font-size:22px}
+.rule-label{font-weight:600;font-size:13px}
+.rule-desc{color:#6B7280;font-size:11px}
+.rule-pts{font-weight:800;font-size:18px}
+.tip{background:rgba(59,130,246,0.1);border-radius:12px;padding:14px;margin-top:14px;border:1px solid rgba(59,130,246,0.2)}
+
+/* Toast */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:#1F2937;color:#F9FAFB;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.5);z-index:200;opacity:0;transition:all 0.3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Day summary */
+.day-summary{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.08)}
+.day-summary h3{font-size:14px;margin-bottom:8px;color:#9CA3AF}
+.day-row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
+.day-row .lbl{color:#9CA3AF}
+.day-row .val{font-weight:700}
+</style>
+</head>
+<body>
+
+<div id="loading" class="loading-screen">
+  <div style="font-size:40px">🎯🚀</div>
+  <div class="spinner"></div>
+  <div style="color:#9CA3AF;font-size:14px">טוען...</div>
+</div>
+
+<div id="login" class="login-screen" style="display:none"></div>
+
+<div id="app" style="display:none">
+  <div class="header">
+    <button class="header-logout" onclick="logout()">החלף</button>
+    <div class="header-center">
+      <h1>🎯 הימורי המלחמה</h1>
+      <p>8 שכנים, הימור אחד, מי ינצח?</p>
+    </div>
+    <div class="header-user" id="headerUser"></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="bet" onclick="switchTab('bet')"><span class="icon">🎯</span>הימור</button>
+    <button class="tab" data-tab="leaderboard" onclick="switchTab('leaderboard')"><span class="icon">🏆</span>דירוג</button>
+    <button class="tab" data-tab="players" onclick="switchTab('players')"><span class="icon">👥</span>שחקנים</button>
+    <button class="tab" data-tab="admin" onclick="switchTab('admin')"><span class="icon">📊</span>מנהל</button>
+    <button class="tab" data-tab="rules" onclick="switchTab('rules')"><span class="icon">📏</span>חוקים</button>
+  </div>
+
+  <div class="content">
+    <div class="screen active" id="screen-bet"></div>
+    <div class="screen" id="screen-leaderboard"></div>
+    <div class="screen" id="screen-players"></div>
+    <div class="screen" id="screen-admin"></div>
+    <div class="screen" id="screen-rules"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// ========================
+// CONFIG
+// ========================
+const firebaseConfig = {
+  apiKey: "AIzaSyDhdRoj_iD2Xjc6ZuB0QbcQ_4WyCpBKN0g",
+  authDomain: "war-bets.firebaseapp.com",
+  databaseURL: "https://war-bets-default-rtdb.firebaseio.com",
+  projectId: "war-bets",
+  storageBucket: "war-bets.firebasestorage.app",
+  messagingSenderId: "194079881603",
+  appId: "1:194079881603:web:ee3cc54e0b5bc81c2b1eb6"
+};
+
+// ========================
+// DATA
+// ========================
+const PLAYERS = [
+  { id: 1, name: "יוני", emoji: "🎯", color: "#3B82F6" },
+  { id: 2, name: "אבי", emoji: "🔥", color: "#EF4444" },
+  { id: 3, name: "דני", emoji: "⚡", color: "#F59E0B" },
+  { id: 4, name: "מיכל", emoji: "🌟", color: "#10B981" },
+  { id: 5, name: "רון", emoji: "🎲", color: "#8B5CF6" },
+  { id: 6, name: "שרה", emoji: "💎", color: "#EC4899" },
+  { id: 7, name: "גיל", emoji: "🏆", color: "#F97316" },
+  { id: 8, name: "נועה", emoji: "✨", color: "#06B6D4" },
+];
+
+const CATEGORIES = [
+  { id: "alerts", label: "מספר אזעקות", icon: "🚨", type: "number", description: "כמה אזעקות יהיו היום?" },
+  { id: "falls", label: "מספר נפילות", icon: "💥", type: "number", description: "כמה נפילות יהיו היום?" },
+  { id: "timeRange", label: "שעת אזעקה ראשונה", icon: "⏰", type: "time", description: "מתי תהיה האזעקה הראשונה?" },
+];
+
+const TIME_OPTIONS = ["00:00-04:00","04:00-08:00","08:00-12:00","12:00-16:00","16:00-20:00","20:00-00:00","לא תהיה"];
+
+const ADMIN_ID = 1; // יוני is admin
+
+// ========================
+// STATE
+// ========================
+let db;
+let currentUserId = null;
+let gameData = { bets: {}, results: {}, scores: {} };
+let todayKey = getTodayKey();
+
+function getTodayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function getUser() { return PLAYERS.find(p => p.id === currentUserId); }
+
+function formatDate() {
+  return new Date().toLocaleDateString("he-IL", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+}
+
+// ========================
+// FIREBASE
+// ========================
+function initFirebase() {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+    listenToData();
+  } catch(e) {
+    // Fallback to localStorage if Firebase fails
+    console.warn("Firebase unavailable, using localStorage fallback");
+    db = null;
+    loadLocalData();
+  }
+  showLoginOrApp();
+}
+
+function listenToData() {
+  if (!db) return;
+
+  // Listen to today's bets
+  db.ref(`days/${todayKey}/bets`).on('value', snap => {
+    gameData.bets = snap.val() || {};
+    renderActiveScreen();
+  });
+
+  // Listen to today's results
+  db.ref(`days/${todayKey}/results`).on('value', snap => {
+    gameData.results = snap.val() || {};
+    renderActiveScreen();
+  });
+
+  // Listen to total scores
+  db.ref('scores').on('value', snap => {
+    gameData.scores = snap.val() || {};
+    renderActiveScreen();
+  });
+}
+
+function saveBet(userId, bets) {
+  if (db) {
+    db.ref(`days/${todayKey}/bets/${userId}`).set(bets);
+  } else {
+    if (!gameData.bets) gameData.bets = {};
+    gameData.bets[userId] = bets;
+    saveLocal();
+    renderActiveScreen();
+  }
+}
+
+function saveResults(results) {
+  if (db) {
+    db.ref(`days/${todayKey}/results`).set(results);
+  } else {
+    gameData.results = results;
+    saveLocal();
+    renderActiveScreen();
+  }
+}
+
+function saveScores(scores) {
+  if (db) {
+    db.ref('scores').set(scores);
+  } else {
+    gameData.scores = scores;
+    saveLocal();
+    renderActiveScreen();
+  }
+}
+
+function loadLocalData() {
+  try {
+    const s = localStorage.getItem('warBets_v2');
+    if (s) {
+      const d = JSON.parse(s);
+      if (d.todayKey === todayKey) {
+        gameData = d.gameData || { bets:{}, results:{}, scores:{} };
+      } else {
+        gameData = { bets:{}, results:{}, scores: d.gameData?.scores || {} };
+      }
+    }
+  } catch(e) {}
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem('warBets_v2', JSON.stringify({ todayKey, gameData }));
+  } catch(e) {}
+}
+
+// ========================
+// LOGIN
+// ========================
+function showLoginOrApp() {
+  document.getElementById('loading').style.display = 'none';
+
+  const saved = localStorage.getItem('warBets_userId');
+  if (saved) {
+    currentUserId = parseInt(saved);
+    showApp();
+  } else {
+    showLogin();
+  }
+}
+
+function showLogin() {
+  document.getElementById('login').style.display = '';
+  document.getElementById('app').style.display = 'none';
+
+  let html = `
+    <div style="font-size:48px;margin-bottom:8px">🎯🚀</div>
+    <div class="login-title">הימורי המלחמה</div>
+    <div class="login-sub">בחר את השם שלך</div>
+    <div class="login-grid">`;
+
+  PLAYERS.forEach(p => {
+    html += `<button class="login-btn" style="border-color:${p.color}33" onclick="loginAs(${p.id})">
+      <span class="emoji">${p.emoji}</span>
+      <span class="name" style="color:${p.color}">${p.name}</span>
+    </button>`;
+  });
+
+  html += `</div>`;
+  document.getElementById('login').innerHTML = html;
+}
+
+function loginAs(id) {
+  currentUserId = id;
+  localStorage.setItem('warBets_userId', id);
+  showApp();
+}
+
+function logout() {
+  localStorage.removeItem('warBets_userId');
+  currentUserId = null;
+  showLogin();
+}
+
+function showApp() {
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('app').style.display = '';
+  const u = getUser();
+  document.getElementById('headerUser').innerHTML = `${u.emoji} ${u.name}`;
+  document.getElementById('headerUser').style.background = u.color + '22';
+  document.getElementById('headerUser').style.color = u.color;
+  document.getElementById('headerUser').style.border = `2px solid ${u.color}`;
+  renderAllScreens();
+}
+
+// ========================
+// NAVIGATION
+// ========================
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(`screen-${tab}`).classList.add('active');
+}
+
+function getActiveTab() {
+  const el = document.querySelector('.tab.active');
+  return el ? el.dataset.tab : 'bet';
+}
+
+function renderActiveScreen() {
+  const tab = getActiveTab();
+  const fn = { bet:renderBet, leaderboard:renderLeaderboard, players:renderPlayers, admin:renderAdmin, rules:renderRules };
+  if (fn[tab]) fn[tab]();
+}
+
+function renderAllScreens() {
+  renderBet(); renderLeaderboard(); renderPlayers(); renderAdmin(); renderRules();
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// ========================
+// BET SCREEN
+// ========================
+function renderBet() {
+  const u = getUser();
+  if (!u) return;
+  const ub = gameData.bets[u.id] || {};
+  const filled = CATEGORIES.filter(c => ub[c.id] !== undefined && ub[c.id] !== "").length;
+  const total = CATEGORIES.length;
+  const submitted = ub._submitted;
+
+  let html = `
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:36px">${u.emoji}</div>
+      <h2 style="margin:6px 0 2px;font-size:20px">ההימור של ${u.name}</h2>
+      <p style="color:#9CA3AF;font-size:12px">${formatDate()}</p>
+    </div>`;
+
+  if (submitted) {
+    html += `<div style="text-align:center;padding:20px;background:rgba(16,185,129,0.1);border-radius:12px;border:1px solid rgba(16,185,129,0.2);margin-bottom:14px">
+      <div style="font-size:40px;margin-bottom:8px">✅</div>
+      <div style="font-weight:700;font-size:16px;color:#10B981">ההימור נשלח!</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">מחכים לתוצאות סוף היום</div>
+    </div>`;
+
+    // Show what was bet
+    html += `<div class="day-summary"><h3>ההימור שלך להיום:</h3>`;
+    CATEGORIES.forEach(cat => {
+      const v = ub[cat.id];
+      html += `<div class="day-row"><span class="lbl">${cat.icon} ${cat.label}</span><span class="val">${v !== undefined ? v : '-'}</span></div>`;
+    });
+    html += `</div>`;
+
+    document.getElementById('screen-bet').innerHTML = html;
+    return;
+  }
+
+  // Progress bar
+  html += `<div class="prog-box">
+    <div class="prog-row"><span style="color:#9CA3AF">התקדמות</span><span style="color:#3B82F6;font-weight:600">${filled}/${total}</span></div>
+    <div class="prog-track"><div class="prog-fill" style="width:${(filled/total)*100}%"></div></div>
+  </div>`;
+
+  CATEGORIES.forEach(cat => {
+    const val = ub[cat.id];
+    const isFilled = val !== undefined && val !== "";
+    html += `<div class="card" style="${isFilled ? `border-color:${u.color}44` : ''}">
+      <div class="card-header">
+        <span class="card-icon">${cat.icon}</span>
+        <div><div class="card-label">${cat.label}</div><div class="card-desc">${cat.description}</div></div>
+      </div>`;
+
+    if (cat.type === "number") {
+      html += `<div class="num-row">
+        <button class="num-btn" onclick="chgBet('${cat.id}',-1)">−</button>
+        <div class="num-val" style="color:${u.color}">${val || 0}</div>
+        <button class="num-btn" onclick="chgBet('${cat.id}',1)">+</button>
+      </div>`;
+    }
+
+    if (cat.type === "time") {
+      html += `<div class="chips">${TIME_OPTIONS.map(o =>
+        `<button class="chip ${val===o?'sel':''}" style="${val===o?`border-color:${u.color};color:${u.color};background:${u.color}22`:''}" onclick="setBet('${cat.id}','${o}')">${o}</button>`
+      ).join('')}</div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  const ready = filled === total;
+  html += `<button class="big-btn" style="${ready ? `background:linear-gradient(135deg,${u.color},${u.color}CC);color:#fff` : 'background:rgba(255,255,255,0.1);color:#6B7280'}"
+    ${ready ? 'onclick="submitBet()"' : ''}>${ready ? 'שלח הימור! 🎯' : `מלא עוד ${total-filled} קטגוריות`}</button>`;
+
+  document.getElementById('screen-bet').innerHTML = html;
+}
+
+function chgBet(catId, delta) {
+  const u = getUser();
+  const ub = { ...(gameData.bets[u.id] || {}) };
+  ub[catId] = Math.max(0, (ub[catId] || 0) + delta);
+  gameData.bets[u.id] = ub;
+  renderBet();
+}
+
+function setBet(catId, val) {
+  const u = getUser();
+  const ub = { ...(gameData.bets[u.id] || {}) };
+  ub[catId] = val;
+  gameData.bets[u.id] = ub;
+  renderBet();
+}
+
+function submitBet() {
+  const u = getUser();
+  const ub = { ...(gameData.bets[u.id] || {}), _submitted: true };
+  saveBet(u.id, ub);
+  toast('✅ ההימור נשלח!');
+  renderBet();
+  renderPlayers();
+}
+
+// ========================
+// LEADERBOARD
+// ========================
+function renderLeaderboard() {
+  const sorted = [...PLAYERS].map(p => ({...p, score: gameData.scores[p.id] || 0})).sort((a,b) => b.score - a.score);
+  const medals = ["🥇","🥈","🥉"];
+  const order = [1,0,2];
+
+  let html = `<h2 class="section-title">🏆 טבלת המובילים</h2>`;
+
+  // Check if any scores exist
+  const hasScores = sorted.some(p => p.score > 0);
+
+  if (!hasScores) {
+    html += `<div style="text-align:center;padding:40px 20px;color:#6B7280">
+      <div style="font-size:48px;margin-bottom:12px">🏆</div>
+      <div style="font-size:16px;font-weight:600;margin-bottom:4px">עוד אין ניקוד</div>
+      <div style="font-size:13px">הניקוד יתעדכן אחרי שהמנהל יזין תוצאות</div>
+    </div>`;
+    document.getElementById('screen-leaderboard').innerHTML = html;
+    return;
+  }
+
+  html += `<div class="podium">`;
+  order.forEach(idx => {
+    const p = sorted[idx];
+    const h = [130,95,75][idx];
+    html += `<div class="pod-item">
+      <div class="pod-emoji">${p.emoji}</div>
+      <div class="pod-name">${p.name}</div>
+      <div class="pod-bar" style="height:${h}px;background:linear-gradient(180deg,${p.color},${p.color}88)">
+        <span class="pod-medal">${medals[idx]}</span>
+        <span class="pod-score">${p.score}</span>
+        <span class="pod-pts">נקודות</span>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  sorted.slice(3).forEach((p,i) => {
+    html += `<div class="p-row">
+      <span class="p-rank">${i+4}</span>
+      <span class="p-emoji">${p.emoji}</span>
+      <span class="p-name">${p.name}</span>
+      <span class="p-score" style="color:${p.color}">${p.score}</span>
+    </div>`;
+  });
+
+  document.getElementById('screen-leaderboard').innerHTML = html;
+}
+
+// ========================
+// PLAYERS
+// ========================
+function renderPlayers() {
+  let html = `<h2 class="section-title">👥 סטטוס שחקנים</h2>
+    <p class="section-sub">מי כבר הימר היום?</p>`;
+
+  PLAYERS.forEach(p => {
+    const pb = gameData.bets[p.id] || {};
+    const done = !!pb._submitted;
+    const filled = CATEGORIES.filter(c => pb[c.id] !== undefined && pb[c.id] !== "").length;
+
+    html += `<div class="s-row" ${done ? `style="border:1px solid ${p.color}33"` : ''}>
+      <span style="font-size:26px">${p.emoji}</span>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:14px">${p.name}</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+          <div class="mini-bar"><div class="mini-fill" style="width:${done?100:(filled/CATEGORIES.length)*100}%;background:${done?'#10B981':p.color}"></div></div>
+          <span style="color:#6B7280;font-size:11px">${done?CATEGORIES.length:filled}/${CATEGORIES.length}</span>
+        </div>
+      </div>
+      <div class="s-badge ${done?'s-done':'s-wait'}">${done?'✅ שלח':'⏳ ממתין'}</div>
+    </div>`;
+  });
+
+  document.getElementById('screen-players').innerHTML = html;
+}
+
+// ========================
+// ADMIN
+// ========================
+function renderAdmin() {
+  const isAdmin = currentUserId === ADMIN_ID;
+  const res = gameData.results || {};
+
+  if (!isAdmin) {
+    let html = `<div style="text-align:center;padding:40px 20px">
+      <div style="font-size:48px;margin-bottom:12px">🔒</div>
+      <div style="font-weight:700;font-size:16px;margin-bottom:4px">מסך מנהל</div>
+      <div style="color:#9CA3AF;font-size:13px">רק ${PLAYERS[0].name} יכול להזין תוצאות</div>
+    </div>`;
+
+    // Show results if already entered
+    if (Object.keys(res).length > 0) {
+      html += `<div class="day-summary"><h3>תוצאות היום:</h3>`;
+      CATEGORIES.forEach(cat => {
+        const v = res[cat.id];
+        html += `<div class="day-row"><span class="lbl">${cat.icon} ${cat.label}</span><span class="val">${v !== undefined ? v : 'טרם הוזן'}</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    document.getElementById('screen-admin').innerHTML = html;
+    return;
+  }
+
+  let html = `<div style="text-align:center;margin-bottom:14px">
+    <div style="font-size:36px">📊</div>
+    <h2 style="margin:6px 0 2px;font-size:20px">הזנת תוצאות</h2>
+    <p style="color:#9CA3AF;font-size:12px">${formatDate()}</p>
+  </div>`;
+
+  CATEGORIES.forEach(cat => {
+    const val = res[cat.id];
+    html += `<div class="card" ${val!==undefined ? 'style="border-color:rgba(239,68,68,0.3)"' : ''}>
+      <div class="card-header">
+        <span class="card-icon">${cat.icon}</span>
+        <div><div class="card-label">${cat.label}</div></div>
+      </div>`;
+
+    if (cat.type === "number") {
+      html += `<div class="num-row">
+        <button class="admin-btn" onclick="chgRes('${cat.id}',-1)">−</button>
+        <div class="num-val" style="color:#EF4444">${val || 0}</div>
+        <button class="admin-btn" onclick="chgRes('${cat.id}',1)">+</button>
+      </div>`;
+    }
+
+    if (cat.type === "time") {
+      html += `<div class="chips">${TIME_OPTIONS.map(o =>
+        `<button class="chip ${val===o?'sel':''}" style="${val===o?'border-color:#EF4444;color:#EF4444;background:rgba(239,68,68,0.15)':''}" onclick="setRes('${cat.id}','${o}')">${o}</button>`
+      ).join('')}</div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  html += `<button class="big-btn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff" onclick="calcScores()">חשב ניקוד ופרסם תוצאות 🏆</button>`;
+
+  // Reset button
+  html += `<button class="big-btn" style="background:rgba(255,255,255,0.05);color:#6B7280;margin-top:8px;font-size:13px" onclick="resetDay()">🔄 אפס יום חדש</button>`;
+
+  document.getElementById('screen-admin').innerHTML = html;
+}
+
+function chgRes(catId, delta) {
+  if (!gameData.results) gameData.results = {};
+  gameData.results[catId] = Math.max(0, (gameData.results[catId] || 0) + delta);
+  renderAdmin();
+}
+
+function setRes(catId, val) {
+  if (!gameData.results) gameData.results = {};
+  gameData.results[catId] = val;
+  renderAdmin();
+}
+
+function calcScores() {
+  const res = gameData.results || {};
+  const filled = CATEGORIES.filter(c => res[c.id] !== undefined && res[c.id] !== "").length;
+  if (filled < CATEGORIES.length) {
+    toast('⚠️ מלא את כל התוצאות');
+    return;
+  }
+
+  // Save results first
+  saveResults(res);
+
+  const newScores = { ...(gameData.scores || {}) };
+
+  let summary = [];
+  PLAYERS.forEach(p => {
+    const pb = gameData.bets[p.id];
+    if (!pb || !pb._submitted) return;
+
+    let dayScore = 0;
+    CATEGORIES.forEach(cat => {
+      const bet = pb[cat.id];
+      const actual = res[cat.id];
+      if (bet === undefined || actual === undefined) return;
+
+      if (cat.type === "number") {
+        const diff = Math.abs(bet - actual);
+        if (diff === 0) dayScore += 10;
+        else if (diff === 1) dayScore += 5;
+        else if (diff === 2) dayScore += 3;
+        else if (diff <= 5) dayScore += 1;
+      } else if (cat.type === "time") {
+        if (bet === actual) dayScore += 10;
+        else {
+          const d = Math.abs(TIME_OPTIONS.indexOf(bet) - TIME_OPTIONS.indexOf(actual));
+          if (d === 1) dayScore += 5;
+          else if (d === 2) dayScore += 3;
+        }
+      }
+    });
+
+    newScores[p.id] = (newScores[p.id] || 0) + dayScore;
+    summary.push({ name: p.name, emoji: p.emoji, pts: dayScore });
+  });
+
+  saveScores(newScores);
+  toast('🏆 הניקוד חושב ופורסם!');
+
+  setTimeout(() => switchTab('leaderboard'), 1000);
+}
+
+function resetDay() {
+  if (!confirm('לאפס את כל ההימורים של היום?')) return;
+  if (db) {
+    db.ref(`days/${todayKey}`).remove();
+  }
+  gameData.bets = {};
+  gameData.results = {};
+  saveLocal();
+  toast('🔄 יום חדש!');
+  renderAllScreens();
+}
+
+// ========================
+// RULES
+// ========================
+function renderRules() {
+  const rules = [
+    { pts:10, label:"דיוק מושלם", desc:"ניחשת בדיוק!", color:"#10B981", icon:"🎯" },
+    { pts:5, label:"קרוב מאוד", desc:"הפרש של 1", color:"#3B82F6", icon:"🔥" },
+    { pts:3, label:"קרוב", desc:"הפרש של 2", color:"#F59E0B", icon:"👍" },
+    { pts:1, label:"כיוון נכון", desc:"הפרש של 3-5", color:"#6B7280", icon:"↕️" },
+    { pts:0, label:"פספוס", desc:"הפרש מעל 5", color:"#EF4444", icon:"❌" },
+  ];
+
+  let html = `<h2 class="section-title">📏 חוקי הניקוד</h2>`;
+  rules.forEach(r => {
+    html += `<div class="rule" style="border-right:3px solid ${r.color}">
+      <span class="rule-icon">${r.icon}</span>
+      <div style="flex:1"><div class="rule-label">${r.label}</div><div class="rule-desc">${r.desc}</div></div>
+      <div class="rule-pts" style="color:${r.color}">+${r.pts}</div>
+    </div>`;
+  });
+
+  html += `<div class="tip">
+    <div style="font-weight:600;color:#3B82F6;margin-bottom:6px;font-size:14px">💡 איך זה עובד?</div>
+    <div style="color:#9CA3AF;font-size:13px;line-height:1.7">
+      כל בוקר כל אחד מזין את ההימור שלו על 3 קטגוריות.<br>
+      בסוף היום המנהל (יוני) מזין את התוצאות בפועל.<br>
+      הניקוד מחושב אוטומטית לפי קרבה לתוצאה.<br>
+      הנקודות מצטברות מיום ליום!
+    </div>
+  </div>`;
+
+  document.getElementById('screen-rules').innerHTML = html;
+}
+
+// ========================
+// INIT
+// ========================
+initFirebase();
+</script>
+</body>
+</html>
