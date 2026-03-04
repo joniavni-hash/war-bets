@@ -2,11 +2,11 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#111827">
-<title>הימורי המלחמה 🎯</title>
+<title>×”×™×ž×•×¨×™ ×”×ž×œ×—×ž×” ðŸŽ¯</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#111827;color:#F9FAFB;min-height:100vh;min-height:100dvh;direction:rtl;overflow-x:hidden}
@@ -27,7 +27,7 @@ input{font-family:inherit}
 .login-btn .emoji{font-size:28px}
 .login-btn .name{font-weight:600;font-size:15px}
 .login-btn.taken{opacity:0.35;pointer-events:none}
-.login-btn.taken::after{content:'✅';position:absolute;top:6px;left:6px;font-size:14px}
+.login-btn.taken::after{content:'âœ…';position:absolute;top:6px;left:6px;font-size:14px}
 
 .header{background:linear-gradient(135deg,#1E3A5F,#0F172A);padding:14px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:space-between}
 .header-center h1{font-size:18px;font-weight:800}
@@ -131,29 +131,29 @@ input{font-family:inherit}
 <body>
 
 <div id="loading" class="loading-screen">
-  <div style="font-size:40px">🎯🚀</div>
+  <div style="font-size:40px">ðŸŽ¯ðŸš€</div>
   <div class="spinner"></div>
-  <div style="color:#9CA3AF;font-size:14px">טוען...</div>
+  <div style="color:#9CA3AF;font-size:14px">×˜×•×¢×Ÿ...</div>
 </div>
 
 <div id="login" class="login-screen" style="display:none"></div>
 
 <div id="app" style="display:none">
   <div class="header">
-    <button class="header-logout" onclick="logout()">החלף</button>
+    <button class="header-logout" onclick="logout()">×”×—×œ×£</button>
     <div class="header-center">
-      <h1>🎯 הימורי המלחמה</h1>
-      <div class="subtitle">קומפלקס דן שומרון 11</div>
+      <h1>ðŸŽ¯ ×”×™×ž×•×¨×™ ×”×ž×œ×—×ž×”</h1>
+      <div class="subtitle">×§×•×ž×¤×œ×§×¡ ×“×Ÿ ×©×•×ž×¨×•×Ÿ 11</div>
     </div>
     <div class="header-user" id="headerUser"></div>
   </div>
 
   <div class="tabs">
-    <button class="tab active" data-tab="bet" onclick="switchTab('bet')"><span class="icon">🎯</span>הימור</button>
-    <button class="tab" data-tab="leaderboard" onclick="switchTab('leaderboard')"><span class="icon">🏆</span>דירוג</button>
-    <button class="tab" data-tab="players" onclick="switchTab('players')"><span class="icon">👥</span>שחקנים</button>
-    <button class="tab" data-tab="admin" onclick="switchTab('admin')"><span class="icon">⚙️</span>ניהול</button>
-    <button class="tab" data-tab="rules" onclick="switchTab('rules')"><span class="icon">📏</span>חוקים</button>
+    <button class="tab active" data-tab="bet" onclick="switchTab('bet')"><span class="icon">ðŸŽ¯</span>×”×™×ž×•×¨</button>
+    <button class="tab" data-tab="leaderboard" onclick="switchTab('leaderboard')"><span class="icon">ðŸ†</span>×“×™×¨×•×’</button>
+    <button class="tab" data-tab="plays" onclick="switchTab('plaers')"><span class="icon">ðŸ‘¥</span>×©×—×§× ×™×</button>
+    <button class="tab" data-tab="admin" onclick="switchTab('admin')"><span class="icon">âš™ï¸</span>× ×™×”×•×œ</button>
+    <button class="tab" data-tab="rules" onclick="switchTab('rules')"><span class="icon">ðŸ“</span>×—×•×§×™×</button>
   </div>
 
   <div class="content">
@@ -189,35 +189,35 @@ const firebaseConfig = {
 // DATA
 // ========================
 const DEFAULT_PLAYERS = [
-  { id: 1, name: "יוני", emoji: "🎯", color: "#3B82F6" },
-  { id: 2, name: "דודי", emoji: "🔥", color: "#EF4444" },
-  { id: 3, name: "נועם", emoji: "⚡", color: "#F59E0B" },
-  { id: 4, name: "נטע הבן", emoji: "🌟", color: "#10B981" },
-  { id: 5, name: "נטע הבת", emoji: "💎", color: "#EC4899" },
-  { id: 6, name: "ליאורה", emoji: "✨", color: "#06B6D4" },
-  { id: 7, name: "שני", emoji: "🎲", color: "#8B5CF6" },
-  { id: 8, name: "ליטל", emoji: "🏆", color: "#F97316" },
-  { id: 9, name: "גל", emoji: "🌊", color: "#14B8A6" },
-  { id: 10, name: "גיא", emoji: "🦁", color: "#A855F7" },
+  { id: 1, name: "×™×•× ×™", emoji: "ðŸŽ¯", color: "#3B82F6" },
+  { id: 2, name: "×“×•×“×™", emoji: "ðŸ”¥", color: "#EF4444" },
+  { id: 3, name: "× ×•×¢×", emoji: "âš¡", color: "#F59E0B" },
+  { id: 4, name: "× ×˜×¢ ×”×‘×Ÿ", emoji: "ðŸŒŸ", color: "#10B981" },
+  { id: 5, name: "× ×˜×¢ ×”×‘×ª", emoji: "ðŸ’Ž", color: "#EC4899" },
+  { id: 6, name: "×œ×™××•×¨×”", emoji: "âœ¨", color: "#06B6D4" },
+  { id: 7, name: "×©× ×™", emoji: "ðŸŽ²", color: "#8B5CF6" },
+  { id: 8, name: "×œ×™×˜×œ", emoji: "ðŸ†", color: "#F97316" },
+  { id: 9, name: "×’×œ", emoji: "ðŸŒŠ", color: "#14B8A6" },
+  { id: 10, name: "×’×™×", emoji: "ðŸ¦", color: "#A855F7" },
 ];
 
 let PLAYERS = [...DEFAULT_PLAYERS];
 
 const CATEGORIES = [
-  { id: "alerts", label: "מספר אזעקות", icon: "🚨", type: "number", description: "כמה אזעקות יהיו מחר?" },
-  { id: "falls", label: "מספר נפילות", icon: "💥", type: "number", description: "כמה נפילות יהיו מחר?" },
-  { id: "timeRange", label: "שעת אזעקה ראשונה", icon: "⏰", type: "time", description: "מתי תהיה האזעקה הראשונה מחר?" },
+  { id: "alerts", label: "×ž×¡×¤×¨ ××–×¢×§×•×ª", icon: "ðŸš¨", type: "number", description: "×›×ž×” ××–×¢×§×•×ª ×™×”×™×• ×ž×—×¨?" },
+  { id: "falls", label: "×ž×¡×¤×¨ × ×¤×™×œ×•×ª", icon: "ðŸ’¥", type: "number", description: "×›×ž×” × ×¤×™×œ×•×ª ×™×”×™×• ×ž×—×¨?" },
+  { id: "timeRange", label: "×©×¢×ª ××–×¢×§×” ×¨××©×•× ×”", icon: "â°", type: "time", description: "×ž×ª×™ ×ª×”×™×” ×”××–×¢×§×” ×”×¨××©×•× ×” ×ž×—×¨?" },
 ];
 
 const TIME_OPTIONS = [
   "00:00-02:00","02:00-04:00","04:00-06:00","06:00-08:00",
   "08:00-10:00","10:00-12:00","12:00-14:00","14:00-16:00",
   "16:00-18:00","18:00-20:00","20:00-22:00","22:00-00:00",
-  "לא תהיה"
+  "×œ× ×ª×”×™×”"
 ];
 
-const ADMIN_ID = 1; // יוני is admin
-const ADMIN_PASSWORD = 'dan11'; // סיסמא לכניסה כיוני
+const ADMIN_ID = 1; // ×™×•× ×™ is admin
+const ADMIN_PASSWORD = 'dan11'; // ×¡×™×¡×ž× ×œ×›× ×™×¡×” ×›×™×•× ×™
 const BET_DEADLINE_HOUR = 21; // 21:00
 
 // ========================
@@ -272,11 +272,11 @@ function getTimeToDeadline() {
   const now = new Date();
   const deadline = new Date(now);
   deadline.setHours(BET_DEADLINE_HOUR, 0, 0, 0);
-  if (now >= deadline) return "ההימורים סגורים להיום";
+  if (now >= deadline) return "×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™× ×œ×”×™×•×";
   const diff = deadline - now;
   const h = Math.floor(diff / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
-  return `${h} שעות ו-${m} דקות`;
+  return `${h} ×©×¢×•×ª ×•-${m} ×“×§×•×ª`;
 }
 
 function getUser() { return PLAYERS.find(p => p.id === currentUserId); }
@@ -392,7 +392,7 @@ function getDeviceId() {
     id = 'dev_' + Math.random().toString(36).substr(2, 12);
     localStorage.setItem('warBets_deviceId', id);
   }
-  teturn id;
+  return id;
 }
 
 function savePlayersToFirebase() {
@@ -431,7 +431,7 @@ function showLoginOrApp() {
     showApp();
     return;
   }
-  // אם המכשיר כבר רשום - כניסה ישירה ללא בחירה מחדש
+  // ×× ×”×ž×›×©×™×¨ ×›×‘×¨ ×¨×©×•× - ×›× ×™×¡×” ×™×©×™×¨×” ×œ×œ× ×‘×—×™×¨×” ×ž×—×“×©
   const registered = localStorage.getItem('warBets_registeredPlayerId');
   if (registered) {
     currentUserId = parseInt(registered);
@@ -450,10 +450,10 @@ function showLogin() {
   const regs = gameData.registrations || {};
 
   let html = `
-    <div style="font-size:48px;margin-bottom:8px">🎯🚀</div>
-    <div class="login-title">הימורי המלחמה</div>
-    <div class="login-sub">קומפלקס דן שומרון 11</div>
-    <div class="login-location">בחר את השם שלך כדי להירשם</div>
+    <div style="font-size:48px;margin-bottom:8px">ðŸŽ¯ðŸš€</div>
+    <div class="login-title">×”×™×ž×•×¨×™ ×”×ž×œ×—×ž×”</div>
+    <div class="login-sub">×§×•×ž×¤×œ×§×¡ ×“×Ÿ ×©×•×ž×¨×•×Ÿ 11</div>
+    <div class="login-location">×‘×—×¨ ××ª ×”×©× ×©×œ×š ×›×“×™ ×œ×”×™×¨×©×</div>
     <div class="login-grid">`;
 
   // If device already registered, lock to that player only
@@ -468,13 +468,13 @@ function showLogin() {
     const lockedOut = myRegInt && p.id !== myRegInt;
     const disabled = takenByOther || lockedOut;
     const cls = disabled ? 'login-btn taken' : 'login-btn';
-    // יוני requires password on first registration; once registered, direct login
+    // ×™×•× ×™ requires password on first registration; once registered, direct login
     const onclickFn = disabled ? '' : (p.id === ADMIN_ID && !takenByMe ? 'loginAsAdmin()' : `loginAs(${p.id})`);
 
     html += `<button class="${cls}" style="border-color:${p.color}33${takenByMe ? `;background:${p.color}22` : ''}" onclick="${onclickFn}">
       <span class="emoji">${p.emoji}</span>
       <span class="name" style="color:${p.color}">${p.name}</span>
-      ${lockedOut ? '<span style="position:absolute;top:6px;left:6px;font-size:11px">🔒</span>' : ''}
+      ${lockedOut ? '<span style="position:absolute;top:6px;left:6px;font-size:11px">ðŸ”’</span>' : ''}
     </button>`;
   });
 
@@ -485,7 +485,7 @@ function showLogin() {
 function loginAs(id) {
   currentUserId = id;
   localStorage.setItem('warBets_userId', id);
-  localStorage.setItem('warBets_registeredPlayerId', id); // נעל את הבחירה לתמיד
+  localStorage.setItem('warBets_registeredPlayerId', id); // × ×¢×œ ××ª ×”×‘×—×™×¨×” ×œ×ª×ž×™×“
   registerPlayer(id);
   showApp();
 }
@@ -497,18 +497,18 @@ function loginAsAdmin() {
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px';
   overlay.innerHTML = `
     <div style="background:#1F2937;border-radius:16px;padding:28px 24px;width:100%;max-width:320px;text-align:center;border:1px solid rgba(255,255,255,0.1)">
-      <div style="font-size:36px;margin-bottom:12px">🔐</div>
-      <div style="font-size:18px;font-weight:700;margin-bottom:6px">כניסה כיוני</div>
-      <div style="color:#9CA3AF;font-size:13px;margin-bottom:20px">הזן סיסמא כדי להמשיך</div>
-      <input id="pw-input" type="password" placeholder="סיסמא"
+      <div style="font-size:36px;margin-bottom:12px">ðŸ”</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:6px">×›× ×™×¡×” ×›×™×•× ×™</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-bottom:20px">×”×–×Ÿ ×¡×™×¡×ž× ×›×“×™ ×œ×”×ž×©×™×š</div>
+      <input id="pw-input" type="password" placeholder="×¡×™×¡×ž×"
         style="width:100%;padding:13px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:#F9FAFB;font-size:18px;text-align:center;margin-bottom:10px;outline:none;direction:ltr"
         onkeydown="if(event.key==='Enter')checkAdminPassword()">
       <div id="pw-error" style="color:#EF4444;font-size:12px;margin-bottom:12px;min-height:16px"></div>
       <div style="display:flex;gap:10px">
         <button onclick="document.getElementById('pw-overlay').remove()"
-          style="flex:1;padding:13px;border-radius:10px;background:rgba(255,255,255,0.05);color:#9CA3AF;font-size:14px;font-weight:600;border:none;cursor:pointer">ביטול</button>
+          style="flex:1;padding:13px;border-radius:10px;background:rgba(255,255,255,0.05);color:#9CA3AF;font-size:14px;font-weight:600;border:none;cursor:pointer">×‘×™×˜×•×œ</button>
         <button onclick="checkAdminPassword()"
-          style="flex:1;padding:13px;border-radius:10px;background:#3B82F6;color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">כניסה</button>
+          style="flex:1;padding:13px;border-radius:10px;background:#3B82F6;color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">×›× ×™×¡×”</button>
       </div>
     </div>`;
   document.body.appendChild(overlay);
@@ -522,7 +522,7 @@ function checkAdminPassword() {
     document.getElementById('pw-overlay').remove();
     loginAs(ADMIN_ID);
   } else {
-    document.getElementById('pw-error').textContent = 'סיסמא שגויה, נסה שוב';
+    document.getElementById('pw-error').textContent = '×¡×™×¡×ž× ×©×’×•×™×”, × ×¡×” ×©×•×‘';
     input.value = '';
     input.focus();
   }
@@ -565,8 +565,8 @@ function startDeadlineTimer() {
     const betEl = document.getElementById('deadline-display');
     if (betEl) {
       betEl.innerHTML = isBettingOpen()
-        ? `<span class="label">ההימורים נסגרים בעוד</span><br><span class="time">${getTimeToDeadline()}</span>`
-        : `<span class="time" style="color:#EF4444">ההימורים סגורים להיום</span><br><span class="label">יפתחו מחר בבוקר</span>`;
+        ? `<span class="label">×”×”×™×ž×•×¨×™× × ×¡×’×¨×™× ×‘×¢×•×“</span><br><span class="time">${getTimeToDeadline()}</span>`
+        : `<span class="time" style="color:#EF4444">×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™× ×œ×”×™×•×</span><br><span class="label">×™×¤×ª×—×• ×ž×—×¨ ×‘×‘×•×§×¨</span>`;
     }
   }, 30000);
 }
@@ -618,28 +618,28 @@ function renderBet() {
   let html = `
     <div style="text-align:center;margin-bottom:14px">
       <div style="font-size:36px">${u.emoji}</div>
-      <h2 style="margin:6px 0 2px;font-size:20px">ההימור של ${u.name}</h2>
-      <p style="color:#60A5FA;font-size:13px;font-weight:600">ליום ${formatTomorrow()}</p>
+      <h2 style="margin:6px 0 2px;font-size:20px">×”×”×™×ž×•×¨ ×©×œ ${u.name}</h2>
+      <p style="color:#60A5FA;font-size:13px;font-weight:600">×œ×™×•× ${formatTomorrow()}</p>
       <p style="color:#9CA3AF;font-size:12px;margin-top:2px">${formatDate()}</p>
     </div>`;
 
   // Deadline bar
   html += `<div class="deadline-bar" id="deadline-display">`;
   if (open) {
-    html += `<span class="label">ההימורים נסגרים בעוד</span><br><span class="time">${getTimeToDeadline()}</span>`;
+    html += `<span class="label">×”×”×™×ž×•×¨×™× × ×¡×’×¨×™× ×‘×¢×•×“</span><br><span class="time">${getTimeToDeadline()}</span>`;
   } else {
-    html += `<span class="time" style="color:#EF4444">ההימורים סגורים להיום</span><br><span class="label">יפתחו מחר בבוקר</span>`;
+    html += `<span class="time" style="color:#EF4444">×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™× ×œ×”×™×•×</span><br><span class="label">×™×¤×ª×—×• ×ž×—×¨ ×‘×‘×•×§×¨</span>`;
   }
   html += `</div>`;
 
   if (submitted) {
     html += `<div style="text-align:center;padding:20px;background:rgba(16,185,129,0.1);border-radius:12px;border:1px solid rgba(16,185,129,0.2);margin-bottom:14px">
-      <div style="font-size:40px;margin-bottom:8px">✅</div>
-      <div style="font-weight:700;font-size:16px;color:#10B981">ההימור נשלח!</div>
-      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">מחכים לתוצאות של מחר</div>
+      <div style="font-size:40px;margin-bottom:8px">âœ…</div>
+      <div style="font-weight:700;font-size:16px;color:#10B981">×”×”×™×ž×•×¨ × ×©×œ×—!</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">×ž×—×›×™× ×œ×ª×•×¦××•×ª ×©×œ ×ž×—×¨</div>
     </div>`;
 
-    html += `<div class="day-summary"><h3>ההימור שלך ל-${formatTomorrow()}:</h3>`;
+    html += `<div class="day-summary"><h3>×”×”×™×ž×•×¨ ×©×œ×š ×œ-${formatTomorrow()}:</h3>`;
     CATEGORIES.forEach(cat => {
       const v = ub[cat.id];
       html += `<div class="day-row"><span class="lbl">${cat.icon} ${cat.label}</span><span class="val">${v !== undefined ? v : '-'}</span></div>`;
@@ -652,9 +652,9 @@ function renderBet() {
 
   if (!open) {
     html += `<div style="text-align:center;padding:30px 20px;background:rgba(239,68,68,0.1);border-radius:12px;border:1px solid rgba(239,68,68,0.2)">
-      <div style="font-size:40px;margin-bottom:8px">🔒</div>
-      <div style="font-weight:700;font-size:16px;color:#EF4444">ההימורים סגורים</div>
-      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">אפשר להמר עד 21:00 בלבד</div>
+      <div style="font-size:40px;margin-bottom:8px">ðŸ”’</div>
+      <div style="font-weight:700;font-size:16px;color:#EF4444">×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™×</div>
+      <div style="color:#9CA3AF;font-size:13px;margin-top:4px">××¤×©×¨ ×œ×”×ž×¨ ×¢×“ 21:00 ×‘×œ×‘×“</div>
     </div>`;
     document.getElementById('screen-bet').innerHTML = html;
     return;
@@ -662,7 +662,7 @@ function renderBet() {
 
   // Progress bar
   html += `<div class="prog-box">
-    <div class="prog-row"><span style="color:#9CA3AF">התקדמות</span><span style="color:#3B82F6;font-weight:600">${filled}/${total}</span></div>
+    <div class="prog-row"><span style="color:#9CA3AF">×”×ª×§×“×ž×•×ª</span><span style="color:#3B82F6;font-weight:600">${filled}/${total}</span></div>
     <div class="prog-track"><div class="prog-fill" style="width:${(filled/total)*100}%"></div></div>
   </div>`;
 
@@ -694,13 +694,13 @@ function renderBet() {
 
   const ready = filled === total;
   html += `<button class="big-btn" style="${ready ? `background:linear-gradient(135deg,${u.color},${u.color}CC);color:#fff` : 'background:rgba(255,255,255,0.1);color:#6B7280'}"
-    ${ready ? 'onclick="submitBet()"' : ''}>${ready ? 'שלח הימור! 🎯' : `מלא עוד ${total-filled} קטגוריות`}</button>`;
+    ${ready ? 'onclick="submitBet()"' : ''}>${ready ? '×©×œ×— ×”×™×ž×•×¨! ðŸŽ¯' : `×ž×œ× ×¢×•×“ ${total-filled} ×§×˜×’×•×¨×™×•×ª`}</button>`;
 
   document.getElementById('screen-bet').innerHTML = html;
 }
 
 function chgBet(catId, delta) {
-  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
+  if (!isBettingOpen()) { toast('â° ×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™×!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}) };
   ub[catId] = Math.max(0, (ub[catId] || 0) + delta);
@@ -709,7 +709,7 @@ function chgBet(catId, delta) {
 }
 
 function setBet(catId, val) {
-  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
+  if (!isBettingOpen()) { toast('â° ×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™×!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}) };
   ub[catId] = val;
@@ -718,11 +718,11 @@ function setBet(catId, val) {
 }
 
 function submitBet() {
-  if (!isBettingOpen()) { toast('⏰ ההימורים סגורים!'); return; }
+  if (!isBettingOpen()) { toast('â° ×”×”×™×ž×•×¨×™× ×¡×’×•×¨×™×!'); return; }
   const u = getUser();
   const ub = { ...(gameData.bets[u.id] || {}), _submitted: true };
   saveBet(u.id, ub);
-  toast('✅ ההימור נשלח!');
+  toast('âœ… ×”×”×™×ž×•×¨ × ×©×œ×—!');
   renderBet();
   renderPlayers();
 }
@@ -732,18 +732,18 @@ function submitBet() {
 // ========================
 function renderLeaderboard() {
   const sorted = [...PLAYERS].map(p => ({...p, score: gameData.scores[p.id] || 0})).sort((a,b) => b.score - a.score);
-  const medals = ["🥇","🥈","🥉"];
+  const medals = ["ðŸ¥‡","ðŸ¥ˆ","ðŸ¥‰"];
   const order = [1,0,2];
 
-  let html = `<h2 class="section-title">🏆 טבלת המובילים</h2>`;
+  let html = `<h2 class="section-title">ðŸ† ×˜×‘×œ×ª ×”×ž×•×‘×™×œ×™×</h2>`;
 
   const hasScores = sorted.some(p => p.score > 0);
 
   if (!hasScores) {
     html += `<div style="text-align:center;padding:40px 20px;color:#6B7280">
-      <div style="font-size:48px;margin-bottom:12px">🏆</div>
-      <div style="font-size:16px;font-weight:600;margin-bottom:4px">עוד אין ניקוד</div>
-      <div style="font-size:13px">הניקוד יתעדכן אחרי שהמנהל יזין תוצאות</div>
+      <div style="font-size:48px;margin-bottom:12px">ðŸ†</div>
+      <div style="font-size:16px;font-weight:600;margin-bottom:4px">×¢×•×“ ××™×Ÿ × ×™×§×•×“</div>
+      <div style="font-size:13px">×”× ×™×§×•×“ ×™×ª×¢×“×›×Ÿ ××—×¨×™ ×©×”×ž× ×”×œ ×™×–×™×Ÿ ×ª×•×¦××•×ª</div>
     </div>`;
     document.getElementById('screen-leaderboard').innerHTML = html;
     return;
@@ -761,7 +761,7 @@ function renderLeaderboard() {
         <div class="pod-bar" style="height:${h}px;background:linear-gradient(180deg,${p.color},${p.color}88)">
           <span class="pod-medal">${medals[idx]}</span>
           <span class="pod-score">${p.score}</span>
-          <span class="pod-pts">נקודות</span>
+          <span class="pod-pts">× ×§×•×“×•×ª</span>
         </div>
       </div>`;
     });
@@ -784,8 +784,8 @@ function renderLeaderboard() {
 // PLAYERS
 // ========================
 function renderPlayers() {
-  let html = `<h2 class="section-title">👥 סטטוס שחקנים</h2>
-    <p class="section-sub">מי כבר הימר ל-${formatTomorrow()}?</p>`;
+  let html = `<h2 class="section-title">ðŸ‘¥ ×¡×˜×˜×•×¡ ×©×—×§× ×™×</h2>
+    <p class="section-sub">×ž×™ ×›×‘×¨ ×”×™×ž×¨ ×œ-${formatTomorrow()}?</p>`;
 
   PLAYERS.forEach(p => {
     const pb = gameData.bets[p.id] || {};
@@ -801,7 +801,7 @@ function renderPlayers() {
           <span style="color:#6B7280;font-size:11px">${done?CATEGORIES.length:filled}/${CATEGORIES.length}</span>
         </div>
       </div>
-      <div class="s-badge ${done?'s-done':'s-wait'}">${done?'✅ שלח':'⏳ ממתין'}</div>
+      <div class="s-badge ${done?'s-done':'s-wait'}">${done?'âœ… ×©×œ×—':'â³ ×ž×ž×ª×™×Ÿ'}</div>
     </div>`;
   });
 
@@ -821,14 +821,14 @@ function renderAdmin() {
   const res = gameData.results || {};
 
   let html = `<div style="text-align:center;margin-bottom:14px">
-    <div style="font-size:36px">⚙️</div>
-    <h2 style="margin:6px 0 2px;font-size:20px">ניהול המשחק</h2>
+    <div style="font-size:36px">âš™ï¸</div>
+    <h2 style="margin:6px 0 2px;font-size:20px">× ×™×”×•×œ ×”×ž×©×—×§</h2>
     <p style="color:#9CA3AF;font-size:12px">${formatDate()}</p>
   </div>`;
 
   // ---- RESULTS SECTION ----
   html += `<div class="admin-section">
-    <h3>📊 הזנת תוצאות ליום ${formatDate()}</h3>`;
+    <h3>ðŸ“Š ×”×–× ×ª ×ª×•×¦××•×ª ×œ×™×•× ${formatDate()}</h3>`;
 
   CATEGORIES.forEach(cat => {
     const val = res[cat.id];
@@ -855,12 +855,12 @@ function renderAdmin() {
     html += `</div>`;
   });
 
-  html += `<button class="big-btn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff" onclick="calcScores()">חשב ניקוד ופרסם תוצאות 🏆</button>`;
+  html += `<button class="big-btn" style="background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff" onclick="calcScores()">×—×©×‘ × ×™×§×•×“ ×•×¤×¨×¡× ×ª×•×¦××•×ª ðŸ†</button>`;
   html += `</div>`;
 
   // ---- PLAYERS MANAGEMENT ----
   html += `<div class="admin-section">
-    <h3>👥 ניהול משתתפים</h3>`;
+    <h3>ðŸ‘¥ × ×™×”×•×œ ×ž×©×ª×ª×¤×™×</h3>`;
 
   PLAYERS.forEach(p => {
     const reg = gameData.registrations[p.id];
@@ -869,20 +869,20 @@ function renderAdmin() {
       <span class="emoji">${p.emoji}</span>
       <div class="info">
         <div class="name">${p.name}</div>
-        <div class="status">${isReg ? '✅ רשום' : '⬜ לא נרשם'}</div>
+        <div class="status">${isReg ? 'âœ… ×¨×©×•×' : 'â¬œ ×œ× × ×¨×©×'}</div>
       </div>
-      <button class="admin-small-btn" style="background:rgba(59,130,246,0.15);color:#3B82F6" onclick="editPlayerName(${p.id})">✏️ ערוך</button>
+      <button class="admin-small-btn" style="background:rgba(59,130,246,0.15);color:#3B82F6" onclick="editPlayerName(${p.id})">âœï¸ ×¢×¨×•×š</button>
     </div>`;
   });
 
-  html += `<button class="big-btn" style="background:rgba(16,185,129,0.15);color:#10B981;font-size:14px" onclick="addNewPlayer()">+ הוסף משתתף</button>`;
+  html += `<button class="big-btn" style="background:rgba(16,185,129,0.15);color:#10B981;font-size:14px" onclick="addNewPlayer()">+ ×”×•×¡×£ ×ž×©×ª×ª×£</button>`;
   html += `</div>`;
 
   // ---- GAME CONTROLS ----
   html += `<div class="admin-section">
-    <h3>🔧 פעולות</h3>
-    <button class="big-btn" style="background:rgba(245,158,11,0.15);color:#F59E0B;font-size:14px;margin-top:0" onclick="resetBets()">🔄 אפס הימורים של מחר</button>
-    <button class="big-btn" style="background:rgba(239,68,68,0.15);color:#EF4444;font-size:14px" onclick="resetAllScores()">🗑️ אפס את כל הניקוד</button>
+    <h3>ðŸ”§ ×¤×¢×•×œ×•×ª</h3>
+    <button class="big-btn" style="background:rgba(245,158,11,0.15);color:#F59E0B;font-size:14px;margin-top:0" onclick="resetBets()">ðŸ”„ ××¤×¡ ×”×™×ž×•×¨×™× ×©×œ ×ž×—×¨</button>
+    <button class="big-btn" style="background:rgba(239,68,68,0.15);color:#EF4444;font-size:14px" onclick="resetAllScores()">ðŸ—‘ï¸ ××¤×¡ ××ª ×›×œ ×”× ×™×§×•×“</button>
   </div>`;
 
   document.getElementById('screen-admin').innerHTML = html;
@@ -891,19 +891,19 @@ function renderAdmin() {
 function editPlayerName(playerId) {
   const player = PLAYERS.find(p => p.id === playerId);
   if (!player) return;
-  const newName = prompt(`שם חדש עבור ${player.name}:`, player.name);
+  const newName = prompt(`×©× ×—×“×© ×¢×‘×•×¨ ${player.name}:`, player.name);
   if (newName && newName.trim()) {
     player.name = newName.trim();
     savePlayersToFirebase();
-    toast(`✅ השם עודכן ל-${newName.trim()}`);
+    toast(`âœ… ×”×©× ×¢×•×“×›×Ÿ ×œ-${newName.trim()}`);
     renderAllScreens();
   }
 }
 
 function addNewPlayer() {
-  const name = prompt('שם המשתתף החדש:');
+  const name = prompt('×©× ×”×ž×©×ª×ª×£ ×”×—×“×©:');
   if (!name || !name.trim()) return;
-  const emojis = ["🌟","💫","🎪","🎭","🎨","🎵","🔮","🌈","🍀","🦊","🐯","🦅"];
+  const emojis = ["ðŸŒŸ","ðŸ’«","ðŸŽª","ðŸŽ­","ðŸŽ¨","ðŸŽµ","ðŸ”®","ðŸŒˆ","ðŸ€","ðŸ¦Š","ðŸ¯","ðŸ¦…"];
   const colors = ["#F43F5E","#D946EF","#0EA5E9","#84CC16","#FB923C","#64748B"];
   const newId = Math.max(...PLAYERS.map(p => p.id)) + 1;
   const emoji = emojis[newId % emojis.length];
@@ -911,7 +911,7 @@ function addNewPlayer() {
 
   PLAYERS.push({ id: newId, name: name.trim(), emoji, color });
   savePlayersToFirebase();
-  toast(`✅ ${name.trim()} נוסף!`);
+  toast(`âœ… ${name.trim()} × ×•×¡×£!`);
   renderAllScreens();
 }
 
@@ -931,7 +931,7 @@ function calcScores() {
   const res = gameData.results || {};
   const filled = CATEGORIES.filter(c => res[c.id] !== undefined && res[c.id] !== "").length;
   if (filled < CATEGORIES.length) {
-    toast('⚠️ מלא את כל התוצאות');
+    toast('âš ï¸ ×ž×œ× ××ª ×›×œ ×”×ª×•×¦××•×ª');
     return;
   }
 
@@ -986,31 +986,31 @@ function doCalcScores(bets, res) {
   });
 
   saveScores(newScores);
-  toast('🏆 הניקוד חושב ופורסם!');
+  toast('ðŸ† ×”× ×™×§×•×“ ×—×•×©×‘ ×•×¤×•×¨×¡×!');
   setTimeout(() => switchTab('leaderboard'), 1000);
 }
 
 function resetBets() {
-  if (!confirm('לאפס את כל ההימורים של מחר?')) return;
+  if (!confirm('×œ××¤×¡ ××ª ×›×œ ×”×”×™×ž×•×¨×™× ×©×œ ×ž×—×¨?')) return;
   const betDay = getBetDayKey();
   if (db) {
     db.ref(`days/${betDay}/bets`).remove();
   }
   gameData.bets = {};
   saveLocal();
-  toast('🔄 ההימורים אופסו!');
+  toast('ðŸ”„ ×”×”×™×ž×•×¨×™× ××•×¤×¡×•!');
   renderAllScreens();
 }
 
 function resetAllScores() {
-  if (!confirm('לאפס את כל הניקוד המצטבר? פעולה זו בלתי הפיכה!')) return;
-  if (!confirm('בטוח? כל הנקודות יימחקו')) return;
+  if (!confirm('×œ××¤×¡ ××ª ×›×œ ×”× ×™×§×•×“ ×”×ž×¦×˜×‘×¨? ×¤×¢×•×œ×” ×–×• ×‘×œ×ª×™ ×”×¤×™×›×”!')) return;
+  if (!confirm('×‘×˜×•×—? ×›×œ ×”× ×§×•×“×•×ª ×™×™×ž×—×§×•')) return;
   if (db) {
     db.ref('scores').remove();
   }
   gameData.scores = {};
   saveLocal();
-  toast('🗑️ כל הניקוד אופס');
+  toast('ðŸ—‘ï¸ ×›×œ ×”× ×™×§×•×“ ××•×¤×¡');
   renderAllScreens();
 }
 
@@ -1019,14 +1019,14 @@ function resetAllScores() {
 // ========================
 function renderRules() {
   const rules = [
-    { pts:10, label:"דיוק מושלם", desc:"ניחשת בדיוק!", color:"#10B981", icon:"🎯" },
-    { pts:5, label:"קרוב מאוד", desc:"הפרש של 1 (או טווח צמוד)", color:"#3B82F6", icon:"🔥" },
-    { pts:3, label:"קרוב", desc:"הפרש של 2", color:"#F59E0B", icon:"👍" },
-    { pts:1, label:"כיוון נכון", desc:"הפרש של 3-5", color:"#6B7280", icon":"↕️" },
-    { pts:0, label:"פספוס", desc:"הפרש מח� 5", color:"#EF4444", icon:"❌" },
+    { pts:10, label:"×“×™×•×§ ×ž×•×©×œ×", desc:"× ×™×—×©×ª ×‘×“×™×•×§!", color:"#10B981", icon:"ðŸŽ¯" },
+    { pts:5, label:"×§×¨×•×‘ ×ž××•×“", desc:"×”×¤×¨×© ×©×œ 1 (××• ×˜×•×•×— ×¦×ž×•×“)", color:"#3B82F6", icon:"ðŸ”¥" },
+    { pts:3, label:"×§×¨×•×‘", desc:"×”×¤×¨×© ×©×œ 2", color:"#F59E0B", icon:"ðŸ‘" },
+    { pts:1, label:"×›×™×•×•×Ÿ × ×›×•×Ÿ", desc:"×”×¤×¨×© ×©×œ 3-5", color:"#6B7280", icon":"â†•ï¸" },
+    { pts:0, label:"×¤×¡×¤×•×¡", desc:"×”×¤×¨×© ×ž×—œ 5", color:"#EF4444", icon:"âŒ" },
   ];
 
-  let html = `<h2 class="section-title">📏 חוקי הניקוד</h2>`;
+  let html = `<h2 class="section-title">ðŸ“ ×—×•×§×™ ×”× ×™×§×•×“</h2>`;
   rules.forEach(r => {
     html += `<div class="rule" style="border-right:3px solid ${r.color}">
       <span class="rule-icon">${r.icon}</span>
@@ -1036,13 +1036,13 @@ function renderRules() {
   });
 
   html += `<div class="tip">
-    <div style="font-weight:600;color:#3B82F6;margin-bottom:6px;font-size:14px">💡 איך זה עובד?</div>
+    <div style="font-weight:600;color:#3B82F6;margin-bottom:6px;font-size:14px">ðŸ’¡ ××™×š ×–×” ×¢×•×‘×“?</div>
     <div style="color:#9CA3AF;font-size:13px;line-height:1.7">
-      כל יום עד 21:00 כל אחד מזין את ההימור שלו על 3 קטגוריות ליום המחרת.<br>
-      למחרת, המנהל (יוני) מזין את התוצאות בפועל.<br>
-      הניקוד מחושב אוטומטית לפי קרבה לתוצאה.<br>
-      הנקודות מצטברות מיום ליום!<br><br>
-      <strong>שעת אזעקה ראשונה:</strong> הטווחים בחלוקה של שעתיים.
+      ×›×œ ×™×•× ×¢×“ 21:00 ×›×œ ××—×“ ×ž×–×™×Ÿ ××ª ×”×”×™×ž×•×¨ ×©×œ×• ×¢×œ 3 ×§×˜×’×•×¨×™×•×ª ×œ×™×•× ×”×ž×—×¨×ª.<br>
+      ×œ×ž×—×¨×ª, ×”×ž× ×”×œ (×™×•× ×™) ×ž×–×™×Ÿ ××ª ×”×ª×•×¦××•×ª ×‘×¤×•×¢×œ.<br>
+      ×”× ×™×§×•×“ ×ž×—×•×©×‘ ××•×˜×•×ž×˜×™×ª ×œ×¤×™ ×§×¨×‘×” ×œ×ª×•×¦××”.<br>
+      ×”× ×§×•×“×•×ª ×ž×¦×˜×‘×¨×•×ª ×ž×™×•× ×œ×™×•×!<br><br>
+      <strong>×©×¢×ª ××–×¢×§×” ×¨××©×•× ×”:</strong> ×”×˜×•×•×—×™× ×‘×—×œ×•×§×” ×©×œ ×©×¢×ª×™×™×.
     </div>
   </div>`;
 
